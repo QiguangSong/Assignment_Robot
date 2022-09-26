@@ -8,43 +8,24 @@
 	"item": [
 		{
 			"name": "list_payments",
-			"protocolProfileBehavior": {
-				"disableBodyPruning": true
-			},
 			"request": {
 				"auth": {
 					"type": "basic",
 					"basic": [
 						{
 							"key": "password",
-							"value": "john",
+							"value": "admin",
 							"type": "string"
 						},
 						{
 							"key": "username",
-							"value": "john",
+							"value": "admin",
 							"type": "string"
 						}
 					]
 				},
 				"method": "GET",
-				"header": [
-					{
-						"key": "X-Device-ID",
-						"type": "text",
-						"value": "5c7a4f24-3d83-4195-8438-2fadc7fb4d1b"
-					},
-					{
-						"key": "Content-Type",
-						"name": "Content-Type",
-						"value": "application/json",
-						"type": "text"
-					}
-				],
-				"body": {
-					"mode": "raw",
-					"raw": "{\"phoneNumber\":\"+31600000001\",\"language\":\"en\"}"
-				},
+				"header": [],
 				"url": {
 					"raw": "http://127.0.0.1:5000/finance/api/v1.0/payments",
 					"protocol": "http",
@@ -100,7 +81,7 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\"purchase\":4,\"user\":\"song\", \"amount\": 10.04, \"currency\": \"EUR\", \"completed\": 1}"
+					"raw": "{\"purchase\":4,\"user\":\"jhon\", \"amount\": 2000, \"currency\": \"USD\", \"completed\": 1}"
 				},
 				"url": {
 					"raw": "http://127.0.0.1:5000/finance/api/v1.0/payments",
@@ -124,7 +105,7 @@
 			"response": []
 		},
 		{
-			"name": "process_payment",
+			"name": "process_payment_currency_convert",
 			"request": {
 				"auth": {
 					"type": "basic",
@@ -157,7 +138,7 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\"purchase\":3,\"user\":\"john\", \"amount\": 10.04, \"currency\": \"EUR\", \"completed\": 1}"
+					"raw": ""
 				},
 				"url": {
 					"raw": "http://127.0.0.1:5000/finance/api/v1.0/payments",

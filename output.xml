@@ -1,0 +1,3184 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<robot generator="Robot 5.0.1 (Python 3.8.10 on linux)" generated="20220927 05:10:47.137" rpa="false" schemaversion="3">
+<suite id="s1" name="Tests" source="/home/song/project/Assignment_Robot/Tests">
+<suite id="s1-s1" name="ConvertPayments" source="/home/song/project/Assignment_Robot/Tests/ConvertPayments.robot">
+<test id="s1-s1-t1" name="TestID_Convert_Payments_With_Admin_GBP" line="8">
+<kw name="Create Dictionary" library="BuiltIn">
+<var>&amp;{body}</var>
+<arg>purchase=1001</arg>
+<arg>user=john</arg>
+<arg>amount=9000</arg>
+<arg>currency=GBP</arg>
+<arg>completed=2</arg>
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<msg timestamp="20220927 05:10:47.221" level="INFO">&amp;{body} = { purchase=1001 | user=john | amount=9000 | currency=GBP | completed=2 }</msg>
+<status status="PASS" starttime="20220927 05:10:47.221" endtime="20220927 05:10:47.221"/>
+</kw>
+<kw name="When I create payments with" library="CreatePaymentsKeywords">
+<arg>admin</arg>
+<arg>admin</arg>
+<arg>${body}</arg>
+<doc>Create payment with user credentials</doc>
+<kw name="Create List" library="BuiltIn">
+<var>${auth}</var>
+<arg>${user}</arg>
+<arg>${passwd}</arg>
+<doc>Returns a list containing given items.</doc>
+<msg timestamp="20220927 05:10:47.222" level="INFO">${auth} = ['admin', 'admin']</msg>
+<status status="PASS" starttime="20220927 05:10:47.222" endtime="20220927 05:10:47.222"/>
+</kw>
+<kw name="Create Session" library="RequestsLibrary">
+<arg>paymentsession</arg>
+<arg>${URL}</arg>
+<arg>verify=true</arg>
+<arg>auth=${auth}</arg>
+<doc>Create Session: create a HTTP session to a server</doc>
+<msg timestamp="20220927 05:10:47.222" level="INFO">Creating Session using : alias=paymentsession, url=http://127.0.0.1:5000, headers={},                     cookies={}, auth=&lt;requests.auth.HTTPBasicAuth object at 0x7fce96a154f0&gt;, timeout=None, proxies=None, verify=True,                     debug=0 </msg>
+<status status="PASS" starttime="20220927 05:10:47.222" endtime="20220927 05:10:47.223"/>
+</kw>
+<kw name="Put Request" library="RequestsLibrary">
+<var>${response}</var>
+<arg>paymentsession</arg>
+<arg>${route}</arg>
+<arg>json=${body}</arg>
+<doc>Send a PUT request on the session object found using the
+given `alias`</doc>
+<msg timestamp="20220927 05:10:47.491" level="INFO">PUT Request : url=http://127.0.0.1:5000/finance/api/v1.0/payments 
+ path_url=/finance/api/v1.0/payments 
+ headers={'User-Agent': 'python-requests/2.22.0', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive', 'Content-Length': '91', 'Content-Type': 'application/json', 'Authorization': 'Basic YWRtaW46YWRtaW4='} 
+ body=b'{"purchase": "1001", "user": "john", "amount": "9000", "currency": "GBP", "completed": "2"}' 
+ </msg>
+<msg timestamp="20220927 05:10:47.491" level="INFO">PUT Response : url=http://127.0.0.1:5000/finance/api/v1.0/payments 
+ status=200, reason=OK 
+ body={
+  "created": 1
+}
+ 
+ </msg>
+<msg timestamp="20220927 05:10:47.491" level="INFO">${response} = &lt;Response [200]&gt;</msg>
+<status status="PASS" starttime="20220927 05:10:47.223" endtime="20220927 05:10:47.491"/>
+</kw>
+<status status="PASS" starttime="20220927 05:10:47.221" endtime="20220927 05:10:47.492"/>
+</kw>
+<kw name="Then I convert payments with" library="ConvertPaymentsKeywords">
+<var>${response}</var>
+<arg>admin</arg>
+<arg>admin</arg>
+<doc>Convert payment with user credentials</doc>
+<kw name="Create List" library="BuiltIn">
+<var>${auth}</var>
+<arg>${user}</arg>
+<arg>${passwd}</arg>
+<doc>Returns a list containing given items.</doc>
+<msg timestamp="20220927 05:10:47.494" level="INFO">${auth} = ['admin', 'admin']</msg>
+<status status="PASS" starttime="20220927 05:10:47.493" endtime="20220927 05:10:47.494"/>
+</kw>
+<kw name="Create Session" library="RequestsLibrary">
+<arg>paymentsession</arg>
+<arg>${URL}</arg>
+<arg>verify=true</arg>
+<arg>auth=${auth}</arg>
+<doc>Create Session: create a HTTP session to a server</doc>
+<msg timestamp="20220927 05:10:47.495" level="INFO">Creating Session using : alias=paymentsession, url=http://127.0.0.1:5000, headers={},                     cookies={}, auth=&lt;requests.auth.HTTPBasicAuth object at 0x7fce96a33790&gt;, timeout=None, proxies=None, verify=True,                     debug=0 </msg>
+<status status="PASS" starttime="20220927 05:10:47.494" endtime="20220927 05:10:47.496"/>
+</kw>
+<kw name="Post Request" library="RequestsLibrary">
+<var>${response}</var>
+<arg>paymentsession</arg>
+<arg>${route}</arg>
+<doc>Send a POST request on the session object found using the
+given `alias`</doc>
+<msg timestamp="20220927 05:10:47.780" level="INFO">POST Request : url=http://127.0.0.1:5000/finance/api/v1.0/payments 
+ path_url=/finance/api/v1.0/payments 
+ headers={'User-Agent': 'python-requests/2.22.0', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive', 'Content-Length': '0', 'Authorization': 'Basic YWRtaW46YWRtaW4='} 
+ body=None 
+ </msg>
+<msg timestamp="20220927 05:10:47.780" level="INFO">POST Response : url=http://127.0.0.1:5000/finance/api/v1.0/payments 
+ status=200, reason=OK 
+ body={
+  "processed": 1
+}
+ 
+ </msg>
+<msg timestamp="20220927 05:10:47.780" level="INFO">${response} = &lt;Response [200]&gt;</msg>
+<status status="PASS" starttime="20220927 05:10:47.496" endtime="20220927 05:10:47.780"/>
+</kw>
+<msg timestamp="20220927 05:10:47.781" level="INFO">${response} = &lt;Response [200]&gt;</msg>
+<status status="PASS" starttime="20220927 05:10:47.492" endtime="20220927 05:10:47.781"/>
+</kw>
+<kw name="Then Status Should Be" library="RequestsLibrary">
+<arg>200</arg>
+<arg>${response}</arg>
+<doc>Fails if response status code is different than the expected.</doc>
+<status status="PASS" starttime="20220927 05:10:47.782" endtime="20220927 05:10:47.782"/>
+</kw>
+<kw name="And Should Be Equal As Integers" library="BuiltIn">
+<arg>${response.json()['processed']}</arg>
+<arg>1</arg>
+<doc>Fails if objects are unequal after converting them to integers.</doc>
+<msg timestamp="20220927 05:10:47.785" level="INFO">Argument types are:
+&lt;class 'int'&gt;
+&lt;class 'str'&gt;</msg>
+<status status="PASS" starttime="20220927 05:10:47.783" endtime="20220927 05:10:47.785"/>
+</kw>
+<kw name="Then I get payments with" library="GetPaymentsKeywords">
+<var>${response}</var>
+<arg>admin</arg>
+<arg>admin</arg>
+<doc>Get payment with user credentials</doc>
+<kw name="Create List" library="BuiltIn">
+<var>${auth}</var>
+<arg>${user}</arg>
+<arg>${passwd}</arg>
+<doc>Returns a list containing given items.</doc>
+<msg timestamp="20220927 05:10:47.787" level="INFO">${auth} = ['admin', 'admin']</msg>
+<status status="PASS" starttime="20220927 05:10:47.786" endtime="20220927 05:10:47.787"/>
+</kw>
+<kw name="Create Session" library="RequestsLibrary">
+<arg>paymentsession</arg>
+<arg>${URL}</arg>
+<arg>verify=true</arg>
+<arg>auth=${auth}</arg>
+<doc>Create Session: create a HTTP session to a server</doc>
+<msg timestamp="20220927 05:10:47.788" level="INFO">Creating Session using : alias=paymentsession, url=http://127.0.0.1:5000, headers={},                     cookies={}, auth=&lt;requests.auth.HTTPBasicAuth object at 0x7fce96a50880&gt;, timeout=None, proxies=None, verify=True,                     debug=0 </msg>
+<status status="PASS" starttime="20220927 05:10:47.787" endtime="20220927 05:10:47.789"/>
+</kw>
+<kw name="Get Request" library="RequestsLibrary">
+<var>${response}</var>
+<arg>paymentsession</arg>
+<arg>${route}</arg>
+<doc>Send a GET request on the session object found using the
+given `alias`</doc>
+<msg timestamp="20220927 05:10:47.954" level="INFO">GET Request : url=http://127.0.0.1:5000/finance/api/v1.0/payments 
+ path_url=/finance/api/v1.0/payments 
+ headers={'User-Agent': 'python-requests/2.22.0', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive', 'Authorization': 'Basic YWRtaW46YWRtaW4='} 
+ body=None 
+ </msg>
+<msg timestamp="20220927 05:10:47.954" level="INFO">GET Response : url=http://127.0.0.1:5000/finance/api/v1.0/payments 
+ status=200, reason=OK 
+ body={
+  "payments": [
+    [
+      1,
+      12345,
+      "john",
+      12.5,
+      "EUR",
+      1
+    ],
+    [
+      2,
+      1001,
+      "admin",
+      8010.0,
+      "EUR",
+      1
+    ]
+  ]
+}
+ 
+ </msg>
+<msg timestamp="20220927 05:10:47.954" level="INFO">${response} = &lt;Response [200]&gt;</msg>
+<status status="PASS" starttime="20220927 05:10:47.789" endtime="20220927 05:10:47.954"/>
+</kw>
+<msg timestamp="20220927 05:10:47.955" level="INFO">${response} = &lt;Response [200]&gt;</msg>
+<status status="PASS" starttime="20220927 05:10:47.785" endtime="20220927 05:10:47.955"/>
+</kw>
+<kw name="Payment should contain currency" library="GetPaymentsKeywords">
+<arg>${response}</arg>
+<arg>EUR</arg>
+<doc>Payment should contain specific purchase ID</doc>
+<kw name="Get Length" library="BuiltIn">
+<var>${PaymentLength}</var>
+<arg>${payment.json()['payments'][-1]}</arg>
+<doc>Returns and logs the length of the given item as an integer.</doc>
+<msg timestamp="20220927 05:10:47.956" level="INFO">Length is 6</msg>
+<msg timestamp="20220927 05:10:47.956" level="INFO">${PaymentLength} = 6</msg>
+<status status="PASS" starttime="20220927 05:10:47.955" endtime="20220927 05:10:47.956"/>
+</kw>
+<kw name="Should Be Equal As Integers" library="BuiltIn">
+<arg>${PaymentLength}</arg>
+<arg>6</arg>
+<doc>Fails if objects are unequal after converting them to integers.</doc>
+<msg timestamp="20220927 05:10:47.956" level="INFO">Argument types are:
+&lt;class 'int'&gt;
+&lt;class 'str'&gt;</msg>
+<status status="PASS" starttime="20220927 05:10:47.956" endtime="20220927 05:10:47.956"/>
+</kw>
+<kw name="Get From List" library="Collections">
+<var>${titleFromList}</var>
+<arg>${payment.json()['payments'][-1]}</arg>
+<arg>4</arg>
+<doc>Returns the value specified with an ``index`` from ``list``.</doc>
+<msg timestamp="20220927 05:10:47.957" level="INFO">${titleFromList} = EUR</msg>
+<status status="PASS" starttime="20220927 05:10:47.956" endtime="20220927 05:10:47.957"/>
+</kw>
+<kw name="Should Be Equal" library="BuiltIn">
+<arg>${titleFromList}</arg>
+<arg>${currency}</arg>
+<doc>Fails if the given objects are unequal.</doc>
+<status status="PASS" starttime="20220927 05:10:47.957" endtime="20220927 05:10:47.957"/>
+</kw>
+<status status="PASS" starttime="20220927 05:10:47.955" endtime="20220927 05:10:47.957"/>
+</kw>
+<kw name="Payment should not contain currency" library="GetPaymentsKeywords">
+<arg>${response}</arg>
+<arg>GBP</arg>
+<doc>Payment should contain specific purchase ID</doc>
+<kw name="Get Length" library="BuiltIn">
+<var>${PaymentLength}</var>
+<arg>${payment.json()['payments'][-1]}</arg>
+<doc>Returns and logs the length of the given item as an integer.</doc>
+<msg timestamp="20220927 05:10:47.958" level="INFO">Length is 6</msg>
+<msg timestamp="20220927 05:10:47.958" level="INFO">${PaymentLength} = 6</msg>
+<status status="PASS" starttime="20220927 05:10:47.957" endtime="20220927 05:10:47.958"/>
+</kw>
+<kw name="Should Be Equal As Integers" library="BuiltIn">
+<arg>${PaymentLength}</arg>
+<arg>6</arg>
+<doc>Fails if objects are unequal after converting them to integers.</doc>
+<msg timestamp="20220927 05:10:47.958" level="INFO">Argument types are:
+&lt;class 'int'&gt;
+&lt;class 'str'&gt;</msg>
+<status status="PASS" starttime="20220927 05:10:47.958" endtime="20220927 05:10:47.958"/>
+</kw>
+<kw name="Get From List" library="Collections">
+<var>${titleFromList}</var>
+<arg>${payment.json()['payments'][-1]}</arg>
+<arg>4</arg>
+<doc>Returns the value specified with an ``index`` from ``list``.</doc>
+<msg timestamp="20220927 05:10:47.959" level="INFO">${titleFromList} = EUR</msg>
+<status status="PASS" starttime="20220927 05:10:47.958" endtime="20220927 05:10:47.959"/>
+</kw>
+<kw name="Should Not Be Equal" library="BuiltIn">
+<arg>${titleFromList}</arg>
+<arg>${currency}</arg>
+<doc>Fails if the given objects are equal.</doc>
+<status status="PASS" starttime="20220927 05:10:47.959" endtime="20220927 05:10:47.959"/>
+</kw>
+<status status="PASS" starttime="20220927 05:10:47.957" endtime="20220927 05:10:47.959"/>
+</kw>
+<kw name="Web App test case teardown" library="CommonKeywords" type="TEARDOWN">
+<doc>Web App test case teardown</doc>
+<kw name="Reset" library="db_sqlite">
+<status status="PASS" starttime="20220927 05:10:47.959" endtime="20220927 05:10:48.513"/>
+</kw>
+<status status="PASS" starttime="20220927 05:10:47.959" endtime="20220927 05:10:48.513"/>
+</kw>
+<doc>Convert payment with admin user</doc>
+<tag>ConvertPayment Post</tag>
+<status status="PASS" starttime="20220927 05:10:47.220" endtime="20220927 05:10:48.514"/>
+</test>
+<test id="s1-s1-t2" name="TestID_Convert_Payments_With_Admin_USD" line="22">
+<kw name="Create Dictionary" library="BuiltIn">
+<var>&amp;{body}</var>
+<arg>purchase=1001</arg>
+<arg>user=john</arg>
+<arg>amount=9000</arg>
+<arg>currency=USD</arg>
+<arg>completed=2</arg>
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<msg timestamp="20220927 05:10:48.519" level="INFO">&amp;{body} = { purchase=1001 | user=john | amount=9000 | currency=USD | completed=2 }</msg>
+<status status="PASS" starttime="20220927 05:10:48.516" endtime="20220927 05:10:48.519"/>
+</kw>
+<kw name="When I create payments with" library="CreatePaymentsKeywords">
+<arg>admin</arg>
+<arg>admin</arg>
+<arg>${body}</arg>
+<doc>Create payment with user credentials</doc>
+<kw name="Create List" library="BuiltIn">
+<var>${auth}</var>
+<arg>${user}</arg>
+<arg>${passwd}</arg>
+<doc>Returns a list containing given items.</doc>
+<msg timestamp="20220927 05:10:48.522" level="INFO">${auth} = ['admin', 'admin']</msg>
+<status status="PASS" starttime="20220927 05:10:48.521" endtime="20220927 05:10:48.522"/>
+</kw>
+<kw name="Create Session" library="RequestsLibrary">
+<arg>paymentsession</arg>
+<arg>${URL}</arg>
+<arg>verify=true</arg>
+<arg>auth=${auth}</arg>
+<doc>Create Session: create a HTTP session to a server</doc>
+<msg timestamp="20220927 05:10:48.523" level="INFO">Creating Session using : alias=paymentsession, url=http://127.0.0.1:5000, headers={},                     cookies={}, auth=&lt;requests.auth.HTTPBasicAuth object at 0x7fce96a50610&gt;, timeout=None, proxies=None, verify=True,                     debug=0 </msg>
+<status status="PASS" starttime="20220927 05:10:48.522" endtime="20220927 05:10:48.524"/>
+</kw>
+<kw name="Put Request" library="RequestsLibrary">
+<var>${response}</var>
+<arg>paymentsession</arg>
+<arg>${route}</arg>
+<arg>json=${body}</arg>
+<doc>Send a PUT request on the session object found using the
+given `alias`</doc>
+<msg timestamp="20220927 05:10:48.791" level="INFO">PUT Request : url=http://127.0.0.1:5000/finance/api/v1.0/payments 
+ path_url=/finance/api/v1.0/payments 
+ headers={'User-Agent': 'python-requests/2.22.0', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive', 'Content-Length': '91', 'Content-Type': 'application/json', 'Authorization': 'Basic YWRtaW46YWRtaW4='} 
+ body=b'{"purchase": "1001", "user": "john", "amount": "9000", "currency": "USD", "completed": "2"}' 
+ </msg>
+<msg timestamp="20220927 05:10:48.791" level="INFO">PUT Response : url=http://127.0.0.1:5000/finance/api/v1.0/payments 
+ status=200, reason=OK 
+ body={
+  "created": 1
+}
+ 
+ </msg>
+<msg timestamp="20220927 05:10:48.791" level="INFO">${response} = &lt;Response [200]&gt;</msg>
+<status status="PASS" starttime="20220927 05:10:48.524" endtime="20220927 05:10:48.792"/>
+</kw>
+<status status="PASS" starttime="20220927 05:10:48.520" endtime="20220927 05:10:48.792"/>
+</kw>
+<kw name="Then I convert payments with" library="ConvertPaymentsKeywords">
+<var>${response}</var>
+<arg>admin</arg>
+<arg>admin</arg>
+<doc>Convert payment with user credentials</doc>
+<kw name="Create List" library="BuiltIn">
+<var>${auth}</var>
+<arg>${user}</arg>
+<arg>${passwd}</arg>
+<doc>Returns a list containing given items.</doc>
+<msg timestamp="20220927 05:10:48.794" level="INFO">${auth} = ['admin', 'admin']</msg>
+<status status="PASS" starttime="20220927 05:10:48.794" endtime="20220927 05:10:48.794"/>
+</kw>
+<kw name="Create Session" library="RequestsLibrary">
+<arg>paymentsession</arg>
+<arg>${URL}</arg>
+<arg>verify=true</arg>
+<arg>auth=${auth}</arg>
+<doc>Create Session: create a HTTP session to a server</doc>
+<msg timestamp="20220927 05:10:48.796" level="INFO">Creating Session using : alias=paymentsession, url=http://127.0.0.1:5000, headers={},                     cookies={}, auth=&lt;requests.auth.HTTPBasicAuth object at 0x7fce96bc2040&gt;, timeout=None, proxies=None, verify=True,                     debug=0 </msg>
+<status status="PASS" starttime="20220927 05:10:48.795" endtime="20220927 05:10:48.796"/>
+</kw>
+<kw name="Post Request" library="RequestsLibrary">
+<var>${response}</var>
+<arg>paymentsession</arg>
+<arg>${route}</arg>
+<doc>Send a POST request on the session object found using the
+given `alias`</doc>
+<msg timestamp="20220927 05:10:49.080" level="INFO">POST Request : url=http://127.0.0.1:5000/finance/api/v1.0/payments 
+ path_url=/finance/api/v1.0/payments 
+ headers={'User-Agent': 'python-requests/2.22.0', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive', 'Content-Length': '0', 'Authorization': 'Basic YWRtaW46YWRtaW4='} 
+ body=None 
+ </msg>
+<msg timestamp="20220927 05:10:49.080" level="INFO">POST Response : url=http://127.0.0.1:5000/finance/api/v1.0/payments 
+ status=200, reason=OK 
+ body={
+  "processed": 1
+}
+ 
+ </msg>
+<msg timestamp="20220927 05:10:49.081" level="INFO">${response} = &lt;Response [200]&gt;</msg>
+<status status="PASS" starttime="20220927 05:10:48.796" endtime="20220927 05:10:49.081"/>
+</kw>
+<msg timestamp="20220927 05:10:49.082" level="INFO">${response} = &lt;Response [200]&gt;</msg>
+<status status="PASS" starttime="20220927 05:10:48.793" endtime="20220927 05:10:49.082"/>
+</kw>
+<kw name="Then Status Should Be" library="RequestsLibrary">
+<arg>200</arg>
+<arg>${response}</arg>
+<doc>Fails if response status code is different than the expected.</doc>
+<status status="PASS" starttime="20220927 05:10:49.083" endtime="20220927 05:10:49.083"/>
+</kw>
+<kw name="And Should Be Equal As Integers" library="BuiltIn">
+<arg>${response.json()['processed']}</arg>
+<arg>1</arg>
+<doc>Fails if objects are unequal after converting them to integers.</doc>
+<msg timestamp="20220927 05:10:49.086" level="INFO">Argument types are:
+&lt;class 'int'&gt;
+&lt;class 'str'&gt;</msg>
+<status status="PASS" starttime="20220927 05:10:49.084" endtime="20220927 05:10:49.086"/>
+</kw>
+<kw name="Then I get payments with" library="GetPaymentsKeywords">
+<var>${response}</var>
+<arg>admin</arg>
+<arg>admin</arg>
+<doc>Get payment with user credentials</doc>
+<kw name="Create List" library="BuiltIn">
+<var>${auth}</var>
+<arg>${user}</arg>
+<arg>${passwd}</arg>
+<doc>Returns a list containing given items.</doc>
+<msg timestamp="20220927 05:10:49.088" level="INFO">${auth} = ['admin', 'admin']</msg>
+<status status="PASS" starttime="20220927 05:10:49.087" endtime="20220927 05:10:49.088"/>
+</kw>
+<kw name="Create Session" library="RequestsLibrary">
+<arg>paymentsession</arg>
+<arg>${URL}</arg>
+<arg>verify=true</arg>
+<arg>auth=${auth}</arg>
+<doc>Create Session: create a HTTP session to a server</doc>
+<msg timestamp="20220927 05:10:49.089" level="INFO">Creating Session using : alias=paymentsession, url=http://127.0.0.1:5000, headers={},                     cookies={}, auth=&lt;requests.auth.HTTPBasicAuth object at 0x7fce969e75e0&gt;, timeout=None, proxies=None, verify=True,                     debug=0 </msg>
+<status status="PASS" starttime="20220927 05:10:49.088" endtime="20220927 05:10:49.089"/>
+</kw>
+<kw name="Get Request" library="RequestsLibrary">
+<var>${response}</var>
+<arg>paymentsession</arg>
+<arg>${route}</arg>
+<doc>Send a GET request on the session object found using the
+given `alias`</doc>
+<msg timestamp="20220927 05:10:49.275" level="INFO">GET Request : url=http://127.0.0.1:5000/finance/api/v1.0/payments 
+ path_url=/finance/api/v1.0/payments 
+ headers={'User-Agent': 'python-requests/2.22.0', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive', 'Authorization': 'Basic YWRtaW46YWRtaW4='} 
+ body=None 
+ </msg>
+<msg timestamp="20220927 05:10:49.275" level="INFO">GET Response : url=http://127.0.0.1:5000/finance/api/v1.0/payments 
+ status=200, reason=OK 
+ body={
+  "payments": [
+    [
+      1,
+      12345,
+      "john",
+      12.5,
+      "EUR",
+      1
+    ],
+    [
+      2,
+      1001,
+      "admin",
+      7560.0,
+      "EUR",
+      1
+    ]
+  ]
+}
+ 
+ </msg>
+<msg timestamp="20220927 05:10:49.275" level="INFO">${response} = &lt;Response [200]&gt;</msg>
+<status status="PASS" starttime="20220927 05:10:49.089" endtime="20220927 05:10:49.275"/>
+</kw>
+<msg timestamp="20220927 05:10:49.275" level="INFO">${response} = &lt;Response [200]&gt;</msg>
+<status status="PASS" starttime="20220927 05:10:49.086" endtime="20220927 05:10:49.275"/>
+</kw>
+<kw name="Payment should contain currency" library="GetPaymentsKeywords">
+<arg>${response}</arg>
+<arg>EUR</arg>
+<doc>Payment should contain specific purchase ID</doc>
+<kw name="Get Length" library="BuiltIn">
+<var>${PaymentLength}</var>
+<arg>${payment.json()['payments'][-1]}</arg>
+<doc>Returns and logs the length of the given item as an integer.</doc>
+<msg timestamp="20220927 05:10:49.277" level="INFO">Length is 6</msg>
+<msg timestamp="20220927 05:10:49.277" level="INFO">${PaymentLength} = 6</msg>
+<status status="PASS" starttime="20220927 05:10:49.276" endtime="20220927 05:10:49.277"/>
+</kw>
+<kw name="Should Be Equal As Integers" library="BuiltIn">
+<arg>${PaymentLength}</arg>
+<arg>6</arg>
+<doc>Fails if objects are unequal after converting them to integers.</doc>
+<msg timestamp="20220927 05:10:49.278" level="INFO">Argument types are:
+&lt;class 'int'&gt;
+&lt;class 'str'&gt;</msg>
+<status status="PASS" starttime="20220927 05:10:49.277" endtime="20220927 05:10:49.278"/>
+</kw>
+<kw name="Get From List" library="Collections">
+<var>${titleFromList}</var>
+<arg>${payment.json()['payments'][-1]}</arg>
+<arg>4</arg>
+<doc>Returns the value specified with an ``index`` from ``list``.</doc>
+<msg timestamp="20220927 05:10:49.278" level="INFO">${titleFromList} = EUR</msg>
+<status status="PASS" starttime="20220927 05:10:49.278" endtime="20220927 05:10:49.278"/>
+</kw>
+<kw name="Should Be Equal" library="BuiltIn">
+<arg>${titleFromList}</arg>
+<arg>${currency}</arg>
+<doc>Fails if the given objects are unequal.</doc>
+<status status="PASS" starttime="20220927 05:10:49.279" endtime="20220927 05:10:49.279"/>
+</kw>
+<status status="PASS" starttime="20220927 05:10:49.275" endtime="20220927 05:10:49.279"/>
+</kw>
+<kw name="Payment should not contain currency" library="GetPaymentsKeywords">
+<arg>${response}</arg>
+<arg>USD</arg>
+<doc>Payment should contain specific purchase ID</doc>
+<kw name="Get Length" library="BuiltIn">
+<var>${PaymentLength}</var>
+<arg>${payment.json()['payments'][-1]}</arg>
+<doc>Returns and logs the length of the given item as an integer.</doc>
+<msg timestamp="20220927 05:10:49.280" level="INFO">Length is 6</msg>
+<msg timestamp="20220927 05:10:49.280" level="INFO">${PaymentLength} = 6</msg>
+<status status="PASS" starttime="20220927 05:10:49.280" endtime="20220927 05:10:49.280"/>
+</kw>
+<kw name="Should Be Equal As Integers" library="BuiltIn">
+<arg>${PaymentLength}</arg>
+<arg>6</arg>
+<doc>Fails if objects are unequal after converting them to integers.</doc>
+<msg timestamp="20220927 05:10:49.280" level="INFO">Argument types are:
+&lt;class 'int'&gt;
+&lt;class 'str'&gt;</msg>
+<status status="PASS" starttime="20220927 05:10:49.280" endtime="20220927 05:10:49.280"/>
+</kw>
+<kw name="Get From List" library="Collections">
+<var>${titleFromList}</var>
+<arg>${payment.json()['payments'][-1]}</arg>
+<arg>4</arg>
+<doc>Returns the value specified with an ``index`` from ``list``.</doc>
+<msg timestamp="20220927 05:10:49.281" level="INFO">${titleFromList} = EUR</msg>
+<status status="PASS" starttime="20220927 05:10:49.280" endtime="20220927 05:10:49.281"/>
+</kw>
+<kw name="Should Not Be Equal" library="BuiltIn">
+<arg>${titleFromList}</arg>
+<arg>${currency}</arg>
+<doc>Fails if the given objects are equal.</doc>
+<status status="PASS" starttime="20220927 05:10:49.281" endtime="20220927 05:10:49.281"/>
+</kw>
+<status status="PASS" starttime="20220927 05:10:49.279" endtime="20220927 05:10:49.281"/>
+</kw>
+<kw name="Web App test case teardown" library="CommonKeywords" type="TEARDOWN">
+<doc>Web App test case teardown</doc>
+<kw name="Reset" library="db_sqlite">
+<status status="PASS" starttime="20220927 05:10:49.282" endtime="20220927 05:10:49.845"/>
+</kw>
+<status status="PASS" starttime="20220927 05:10:49.281" endtime="20220927 05:10:49.845"/>
+</kw>
+<doc>Convert payment with admin user</doc>
+<tag>ConvertPayment Post</tag>
+<status status="PASS" starttime="20220927 05:10:48.515" endtime="20220927 05:10:49.845"/>
+</test>
+<test id="s1-s1-t3" name="TestID_Convert_Payments_With_Admin_USD_GBP" line="36">
+<kw name="Create Dictionary" library="BuiltIn">
+<var>&amp;{body}</var>
+<arg>purchase=1001</arg>
+<arg>user=john</arg>
+<arg>amount=9000</arg>
+<arg>currency=USD</arg>
+<arg>completed=2</arg>
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<msg timestamp="20220927 05:10:49.847" level="INFO">&amp;{body} = { purchase=1001 | user=john | amount=9000 | currency=USD | completed=2 }</msg>
+<status status="PASS" starttime="20220927 05:10:49.846" endtime="20220927 05:10:49.847"/>
+</kw>
+<kw name="When I create payments with" library="CreatePaymentsKeywords">
+<arg>admin</arg>
+<arg>admin</arg>
+<arg>${body}</arg>
+<doc>Create payment with user credentials</doc>
+<kw name="Create List" library="BuiltIn">
+<var>${auth}</var>
+<arg>${user}</arg>
+<arg>${passwd}</arg>
+<doc>Returns a list containing given items.</doc>
+<msg timestamp="20220927 05:10:49.848" level="INFO">${auth} = ['admin', 'admin']</msg>
+<status status="PASS" starttime="20220927 05:10:49.848" endtime="20220927 05:10:49.848"/>
+</kw>
+<kw name="Create Session" library="RequestsLibrary">
+<arg>paymentsession</arg>
+<arg>${URL}</arg>
+<arg>verify=true</arg>
+<arg>auth=${auth}</arg>
+<doc>Create Session: create a HTTP session to a server</doc>
+<msg timestamp="20220927 05:10:49.849" level="INFO">Creating Session using : alias=paymentsession, url=http://127.0.0.1:5000, headers={},                     cookies={}, auth=&lt;requests.auth.HTTPBasicAuth object at 0x7fce969f4100&gt;, timeout=None, proxies=None, verify=True,                     debug=0 </msg>
+<status status="PASS" starttime="20220927 05:10:49.849" endtime="20220927 05:10:49.849"/>
+</kw>
+<kw name="Put Request" library="RequestsLibrary">
+<var>${response}</var>
+<arg>paymentsession</arg>
+<arg>${route}</arg>
+<arg>json=${body}</arg>
+<doc>Send a PUT request on the session object found using the
+given `alias`</doc>
+<msg timestamp="20220927 05:10:50.165" level="INFO">PUT Request : url=http://127.0.0.1:5000/finance/api/v1.0/payments 
+ path_url=/finance/api/v1.0/payments 
+ headers={'User-Agent': 'python-requests/2.22.0', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive', 'Content-Length': '91', 'Content-Type': 'application/json', 'Authorization': 'Basic YWRtaW46YWRtaW4='} 
+ body=b'{"purchase": "1001", "user": "john", "amount": "9000", "currency": "USD", "completed": "2"}' 
+ </msg>
+<msg timestamp="20220927 05:10:50.165" level="INFO">PUT Response : url=http://127.0.0.1:5000/finance/api/v1.0/payments 
+ status=200, reason=OK 
+ body={
+  "created": 1
+}
+ 
+ </msg>
+<msg timestamp="20220927 05:10:50.165" level="INFO">${response} = &lt;Response [200]&gt;</msg>
+<status status="PASS" starttime="20220927 05:10:49.849" endtime="20220927 05:10:50.165"/>
+</kw>
+<status status="PASS" starttime="20220927 05:10:49.847" endtime="20220927 05:10:50.165"/>
+</kw>
+<kw name="Create Dictionary" library="BuiltIn">
+<var>&amp;{body}</var>
+<arg>purchase=1001</arg>
+<arg>user=john</arg>
+<arg>amount=9000</arg>
+<arg>currency=GBP</arg>
+<arg>completed=2</arg>
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<msg timestamp="20220927 05:10:50.166" level="INFO">&amp;{body} = { purchase=1001 | user=john | amount=9000 | currency=GBP | completed=2 }</msg>
+<status status="PASS" starttime="20220927 05:10:50.165" endtime="20220927 05:10:50.166"/>
+</kw>
+<kw name="When I create payments with" library="CreatePaymentsKeywords">
+<arg>admin</arg>
+<arg>admin</arg>
+<arg>${body}</arg>
+<doc>Create payment with user credentials</doc>
+<kw name="Create List" library="BuiltIn">
+<var>${auth}</var>
+<arg>${user}</arg>
+<arg>${passwd}</arg>
+<doc>Returns a list containing given items.</doc>
+<msg timestamp="20220927 05:10:50.167" level="INFO">${auth} = ['admin', 'admin']</msg>
+<status status="PASS" starttime="20220927 05:10:50.166" endtime="20220927 05:10:50.167"/>
+</kw>
+<kw name="Create Session" library="RequestsLibrary">
+<arg>paymentsession</arg>
+<arg>${URL}</arg>
+<arg>verify=true</arg>
+<arg>auth=${auth}</arg>
+<doc>Create Session: create a HTTP session to a server</doc>
+<msg timestamp="20220927 05:10:50.167" level="INFO">Creating Session using : alias=paymentsession, url=http://127.0.0.1:5000, headers={},                     cookies={}, auth=&lt;requests.auth.HTTPBasicAuth object at 0x7fce969ff040&gt;, timeout=None, proxies=None, verify=True,                     debug=0 </msg>
+<status status="PASS" starttime="20220927 05:10:50.167" endtime="20220927 05:10:50.167"/>
+</kw>
+<kw name="Put Request" library="RequestsLibrary">
+<var>${response}</var>
+<arg>paymentsession</arg>
+<arg>${route}</arg>
+<arg>json=${body}</arg>
+<doc>Send a PUT request on the session object found using the
+given `alias`</doc>
+<msg timestamp="20220927 05:10:50.442" level="INFO">PUT Request : url=http://127.0.0.1:5000/finance/api/v1.0/payments 
+ path_url=/finance/api/v1.0/payments 
+ headers={'User-Agent': 'python-requests/2.22.0', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive', 'Content-Length': '91', 'Content-Type': 'application/json', 'Authorization': 'Basic YWRtaW46YWRtaW4='} 
+ body=b'{"purchase": "1001", "user": "john", "amount": "9000", "currency": "GBP", "completed": "2"}' 
+ </msg>
+<msg timestamp="20220927 05:10:50.442" level="INFO">PUT Response : url=http://127.0.0.1:5000/finance/api/v1.0/payments 
+ status=200, reason=OK 
+ body={
+  "created": 1
+}
+ 
+ </msg>
+<msg timestamp="20220927 05:10:50.443" level="INFO">${response} = &lt;Response [200]&gt;</msg>
+<status status="PASS" starttime="20220927 05:10:50.167" endtime="20220927 05:10:50.443"/>
+</kw>
+<status status="PASS" starttime="20220927 05:10:50.166" endtime="20220927 05:10:50.443"/>
+</kw>
+<kw name="Then I convert payments with" library="ConvertPaymentsKeywords">
+<var>${response}</var>
+<arg>admin</arg>
+<arg>admin</arg>
+<doc>Convert payment with user credentials</doc>
+<kw name="Create List" library="BuiltIn">
+<var>${auth}</var>
+<arg>${user}</arg>
+<arg>${passwd}</arg>
+<doc>Returns a list containing given items.</doc>
+<msg timestamp="20220927 05:10:50.445" level="INFO">${auth} = ['admin', 'admin']</msg>
+<status status="PASS" starttime="20220927 05:10:50.444" endtime="20220927 05:10:50.445"/>
+</kw>
+<kw name="Create Session" library="RequestsLibrary">
+<arg>paymentsession</arg>
+<arg>${URL}</arg>
+<arg>verify=true</arg>
+<arg>auth=${auth}</arg>
+<doc>Create Session: create a HTTP session to a server</doc>
+<msg timestamp="20220927 05:10:50.446" level="INFO">Creating Session using : alias=paymentsession, url=http://127.0.0.1:5000, headers={},                     cookies={}, auth=&lt;requests.auth.HTTPBasicAuth object at 0x7fce96a09130&gt;, timeout=None, proxies=None, verify=True,                     debug=0 </msg>
+<status status="PASS" starttime="20220927 05:10:50.446" endtime="20220927 05:10:50.447"/>
+</kw>
+<kw name="Post Request" library="RequestsLibrary">
+<var>${response}</var>
+<arg>paymentsession</arg>
+<arg>${route}</arg>
+<doc>Send a POST request on the session object found using the
+given `alias`</doc>
+<msg timestamp="20220927 05:10:50.922" level="INFO">POST Request : url=http://127.0.0.1:5000/finance/api/v1.0/payments 
+ path_url=/finance/api/v1.0/payments 
+ headers={'User-Agent': 'python-requests/2.22.0', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive', 'Content-Length': '0', 'Authorization': 'Basic YWRtaW46YWRtaW4='} 
+ body=None 
+ </msg>
+<msg timestamp="20220927 05:10:50.923" level="INFO">POST Response : url=http://127.0.0.1:5000/finance/api/v1.0/payments 
+ status=200, reason=OK 
+ body={
+  "processed": 2
+}
+ 
+ </msg>
+<msg timestamp="20220927 05:10:50.923" level="INFO">${response} = &lt;Response [200]&gt;</msg>
+<status status="PASS" starttime="20220927 05:10:50.447" endtime="20220927 05:10:50.923"/>
+</kw>
+<msg timestamp="20220927 05:10:50.924" level="INFO">${response} = &lt;Response [200]&gt;</msg>
+<status status="PASS" starttime="20220927 05:10:50.444" endtime="20220927 05:10:50.924"/>
+</kw>
+<kw name="Then Status Should Be" library="RequestsLibrary">
+<arg>200</arg>
+<arg>${response}</arg>
+<doc>Fails if response status code is different than the expected.</doc>
+<status status="PASS" starttime="20220927 05:10:50.925" endtime="20220927 05:10:50.925"/>
+</kw>
+<kw name="And Should Be Equal As Integers" library="BuiltIn">
+<arg>${response.json()['processed']}</arg>
+<arg>2</arg>
+<doc>Fails if objects are unequal after converting them to integers.</doc>
+<msg timestamp="20220927 05:10:50.927" level="INFO">Argument types are:
+&lt;class 'int'&gt;
+&lt;class 'str'&gt;</msg>
+<status status="PASS" starttime="20220927 05:10:50.926" endtime="20220927 05:10:50.928"/>
+</kw>
+<kw name="Then I get payments with" library="GetPaymentsKeywords">
+<var>${response}</var>
+<arg>admin</arg>
+<arg>admin</arg>
+<doc>Get payment with user credentials</doc>
+<kw name="Create List" library="BuiltIn">
+<var>${auth}</var>
+<arg>${user}</arg>
+<arg>${passwd}</arg>
+<doc>Returns a list containing given items.</doc>
+<msg timestamp="20220927 05:10:50.930" level="INFO">${auth} = ['admin', 'admin']</msg>
+<status status="PASS" starttime="20220927 05:10:50.929" endtime="20220927 05:10:50.930"/>
+</kw>
+<kw name="Create Session" library="RequestsLibrary">
+<arg>paymentsession</arg>
+<arg>${URL}</arg>
+<arg>verify=true</arg>
+<arg>auth=${auth}</arg>
+<doc>Create Session: create a HTTP session to a server</doc>
+<msg timestamp="20220927 05:10:50.931" level="INFO">Creating Session using : alias=paymentsession, url=http://127.0.0.1:5000, headers={},                     cookies={}, auth=&lt;requests.auth.HTTPBasicAuth object at 0x7fce96a50910&gt;, timeout=None, proxies=None, verify=True,                     debug=0 </msg>
+<status status="PASS" starttime="20220927 05:10:50.930" endtime="20220927 05:10:50.932"/>
+</kw>
+<kw name="Get Request" library="RequestsLibrary">
+<var>${response}</var>
+<arg>paymentsession</arg>
+<arg>${route}</arg>
+<doc>Send a GET request on the session object found using the
+given `alias`</doc>
+<msg timestamp="20220927 05:10:51.131" level="INFO">GET Request : url=http://127.0.0.1:5000/finance/api/v1.0/payments 
+ path_url=/finance/api/v1.0/payments 
+ headers={'User-Agent': 'python-requests/2.22.0', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive', 'Authorization': 'Basic YWRtaW46YWRtaW4='} 
+ body=None 
+ </msg>
+<msg timestamp="20220927 05:10:51.131" level="INFO">GET Response : url=http://127.0.0.1:5000/finance/api/v1.0/payments 
+ status=200, reason=OK 
+ body={
+  "payments": [
+    [
+      1,
+      12345,
+      "john",
+      12.5,
+      "EUR",
+      1
+    ],
+    [
+      2,
+      1001,
+      "admin",
+      7560.0,
+      "EUR",
+      1
+    ],
+    [
+      3,
+      1001,
+      "admin",
+      8010.0,
+      "EUR",
+      1
+    ]
+  ]
+}
+ 
+ </msg>
+<msg timestamp="20220927 05:10:51.132" level="INFO">${response} = &lt;Response [200]&gt;</msg>
+<status status="PASS" starttime="20220927 05:10:50.932" endtime="20220927 05:10:51.132"/>
+</kw>
+<msg timestamp="20220927 05:10:51.132" level="INFO">${response} = &lt;Response [200]&gt;</msg>
+<status status="PASS" starttime="20220927 05:10:50.928" endtime="20220927 05:10:51.132"/>
+</kw>
+<kw name="Payment should contain currency" library="GetPaymentsKeywords">
+<arg>${response}</arg>
+<arg>EUR</arg>
+<doc>Payment should contain specific purchase ID</doc>
+<kw name="Get Length" library="BuiltIn">
+<var>${PaymentLength}</var>
+<arg>${payment.json()['payments'][-1]}</arg>
+<doc>Returns and logs the length of the given item as an integer.</doc>
+<msg timestamp="20220927 05:10:51.133" level="INFO">Length is 6</msg>
+<msg timestamp="20220927 05:10:51.133" level="INFO">${PaymentLength} = 6</msg>
+<status status="PASS" starttime="20220927 05:10:51.132" endtime="20220927 05:10:51.133"/>
+</kw>
+<kw name="Should Be Equal As Integers" library="BuiltIn">
+<arg>${PaymentLength}</arg>
+<arg>6</arg>
+<doc>Fails if objects are unequal after converting them to integers.</doc>
+<msg timestamp="20220927 05:10:51.133" level="INFO">Argument types are:
+&lt;class 'int'&gt;
+&lt;class 'str'&gt;</msg>
+<status status="PASS" starttime="20220927 05:10:51.133" endtime="20220927 05:10:51.133"/>
+</kw>
+<kw name="Get From List" library="Collections">
+<var>${titleFromList}</var>
+<arg>${payment.json()['payments'][-1]}</arg>
+<arg>4</arg>
+<doc>Returns the value specified with an ``index`` from ``list``.</doc>
+<msg timestamp="20220927 05:10:51.134" level="INFO">${titleFromList} = EUR</msg>
+<status status="PASS" starttime="20220927 05:10:51.133" endtime="20220927 05:10:51.134"/>
+</kw>
+<kw name="Should Be Equal" library="BuiltIn">
+<arg>${titleFromList}</arg>
+<arg>${currency}</arg>
+<doc>Fails if the given objects are unequal.</doc>
+<status status="PASS" starttime="20220927 05:10:51.134" endtime="20220927 05:10:51.134"/>
+</kw>
+<status status="PASS" starttime="20220927 05:10:51.132" endtime="20220927 05:10:51.134"/>
+</kw>
+<kw name="Payment should not contain currency" library="GetPaymentsKeywords">
+<arg>${response}</arg>
+<arg>USD</arg>
+<doc>Payment should contain specific purchase ID</doc>
+<kw name="Get Length" library="BuiltIn">
+<var>${PaymentLength}</var>
+<arg>${payment.json()['payments'][-1]}</arg>
+<doc>Returns and logs the length of the given item as an integer.</doc>
+<msg timestamp="20220927 05:10:51.135" level="INFO">Length is 6</msg>
+<msg timestamp="20220927 05:10:51.135" level="INFO">${PaymentLength} = 6</msg>
+<status status="PASS" starttime="20220927 05:10:51.135" endtime="20220927 05:10:51.135"/>
+</kw>
+<kw name="Should Be Equal As Integers" library="BuiltIn">
+<arg>${PaymentLength}</arg>
+<arg>6</arg>
+<doc>Fails if objects are unequal after converting them to integers.</doc>
+<msg timestamp="20220927 05:10:51.135" level="INFO">Argument types are:
+&lt;class 'int'&gt;
+&lt;class 'str'&gt;</msg>
+<status status="PASS" starttime="20220927 05:10:51.135" endtime="20220927 05:10:51.135"/>
+</kw>
+<kw name="Get From List" library="Collections">
+<var>${titleFromList}</var>
+<arg>${payment.json()['payments'][-1]}</arg>
+<arg>4</arg>
+<doc>Returns the value specified with an ``index`` from ``list``.</doc>
+<msg timestamp="20220927 05:10:51.136" level="INFO">${titleFromList} = EUR</msg>
+<status status="PASS" starttime="20220927 05:10:51.135" endtime="20220927 05:10:51.136"/>
+</kw>
+<kw name="Should Not Be Equal" library="BuiltIn">
+<arg>${titleFromList}</arg>
+<arg>${currency}</arg>
+<doc>Fails if the given objects are equal.</doc>
+<status status="PASS" starttime="20220927 05:10:51.136" endtime="20220927 05:10:51.136"/>
+</kw>
+<status status="PASS" starttime="20220927 05:10:51.134" endtime="20220927 05:10:51.136"/>
+</kw>
+<kw name="Payment should not contain currency" library="GetPaymentsKeywords">
+<arg>${response}</arg>
+<arg>GBP</arg>
+<doc>Payment should contain specific purchase ID</doc>
+<kw name="Get Length" library="BuiltIn">
+<var>${PaymentLength}</var>
+<arg>${payment.json()['payments'][-1]}</arg>
+<doc>Returns and logs the length of the given item as an integer.</doc>
+<msg timestamp="20220927 05:10:51.138" level="INFO">Length is 6</msg>
+<msg timestamp="20220927 05:10:51.138" level="INFO">${PaymentLength} = 6</msg>
+<status status="PASS" starttime="20220927 05:10:51.137" endtime="20220927 05:10:51.138"/>
+</kw>
+<kw name="Should Be Equal As Integers" library="BuiltIn">
+<arg>${PaymentLength}</arg>
+<arg>6</arg>
+<doc>Fails if objects are unequal after converting them to integers.</doc>
+<msg timestamp="20220927 05:10:51.139" level="INFO">Argument types are:
+&lt;class 'int'&gt;
+&lt;class 'str'&gt;</msg>
+<status status="PASS" starttime="20220927 05:10:51.138" endtime="20220927 05:10:51.139"/>
+</kw>
+<kw name="Get From List" library="Collections">
+<var>${titleFromList}</var>
+<arg>${payment.json()['payments'][-1]}</arg>
+<arg>4</arg>
+<doc>Returns the value specified with an ``index`` from ``list``.</doc>
+<msg timestamp="20220927 05:10:51.140" level="INFO">${titleFromList} = EUR</msg>
+<status status="PASS" starttime="20220927 05:10:51.139" endtime="20220927 05:10:51.140"/>
+</kw>
+<kw name="Should Not Be Equal" library="BuiltIn">
+<arg>${titleFromList}</arg>
+<arg>${currency}</arg>
+<doc>Fails if the given objects are equal.</doc>
+<status status="PASS" starttime="20220927 05:10:51.140" endtime="20220927 05:10:51.141"/>
+</kw>
+<status status="PASS" starttime="20220927 05:10:51.137" endtime="20220927 05:10:51.141"/>
+</kw>
+<kw name="Web App test case teardown" library="CommonKeywords" type="TEARDOWN">
+<doc>Web App test case teardown</doc>
+<kw name="Reset" library="db_sqlite">
+<status status="PASS" starttime="20220927 05:10:51.141" endtime="20220927 05:10:51.712"/>
+</kw>
+<status status="PASS" starttime="20220927 05:10:51.141" endtime="20220927 05:10:51.713"/>
+</kw>
+<doc>Convert payment with admin user</doc>
+<tag>ConvertPayment Post</tag>
+<status status="PASS" starttime="20220927 05:10:49.845" endtime="20220927 05:10:51.713"/>
+</test>
+<test id="s1-s1-t4" name="TestID_Convert_Payments_With_Wrong_Password" line="53">
+<kw name="Create Dictionary" library="BuiltIn">
+<var>&amp;{body}</var>
+<arg>purchase=1001</arg>
+<arg>user=john</arg>
+<arg>amount=9000</arg>
+<arg>currency=USD</arg>
+<arg>completed=2</arg>
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<msg timestamp="20220927 05:10:51.716" level="INFO">&amp;{body} = { purchase=1001 | user=john | amount=9000 | currency=USD | completed=2 }</msg>
+<status status="PASS" starttime="20220927 05:10:51.715" endtime="20220927 05:10:51.716"/>
+</kw>
+<kw name="When I create payments with" library="CreatePaymentsKeywords">
+<arg>admin</arg>
+<arg>admin</arg>
+<arg>${body}</arg>
+<doc>Create payment with user credentials</doc>
+<kw name="Create List" library="BuiltIn">
+<var>${auth}</var>
+<arg>${user}</arg>
+<arg>${passwd}</arg>
+<doc>Returns a list containing given items.</doc>
+<msg timestamp="20220927 05:10:51.719" level="INFO">${auth} = ['admin', 'admin']</msg>
+<status status="PASS" starttime="20220927 05:10:51.718" endtime="20220927 05:10:51.719"/>
+</kw>
+<kw name="Create Session" library="RequestsLibrary">
+<arg>paymentsession</arg>
+<arg>${URL}</arg>
+<arg>verify=true</arg>
+<arg>auth=${auth}</arg>
+<doc>Create Session: create a HTTP session to a server</doc>
+<msg timestamp="20220927 05:10:51.720" level="INFO">Creating Session using : alias=paymentsession, url=http://127.0.0.1:5000, headers={},                     cookies={}, auth=&lt;requests.auth.HTTPBasicAuth object at 0x7fce96a10b20&gt;, timeout=None, proxies=None, verify=True,                     debug=0 </msg>
+<status status="PASS" starttime="20220927 05:10:51.719" endtime="20220927 05:10:51.721"/>
+</kw>
+<kw name="Put Request" library="RequestsLibrary">
+<var>${response}</var>
+<arg>paymentsession</arg>
+<arg>${route}</arg>
+<arg>json=${body}</arg>
+<doc>Send a PUT request on the session object found using the
+given `alias`</doc>
+<msg timestamp="20220927 05:10:51.983" level="INFO">PUT Request : url=http://127.0.0.1:5000/finance/api/v1.0/payments 
+ path_url=/finance/api/v1.0/payments 
+ headers={'User-Agent': 'python-requests/2.22.0', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive', 'Content-Length': '91', 'Content-Type': 'application/json', 'Authorization': 'Basic YWRtaW46YWRtaW4='} 
+ body=b'{"purchase": "1001", "user": "john", "amount": "9000", "currency": "USD", "completed": "2"}' 
+ </msg>
+<msg timestamp="20220927 05:10:51.983" level="INFO">PUT Response : url=http://127.0.0.1:5000/finance/api/v1.0/payments 
+ status=200, reason=OK 
+ body={
+  "created": 1
+}
+ 
+ </msg>
+<msg timestamp="20220927 05:10:51.983" level="INFO">${response} = &lt;Response [200]&gt;</msg>
+<status status="PASS" starttime="20220927 05:10:51.721" endtime="20220927 05:10:51.983"/>
+</kw>
+<status status="PASS" starttime="20220927 05:10:51.717" endtime="20220927 05:10:51.984"/>
+</kw>
+<kw name="Then I convert payments with" library="ConvertPaymentsKeywords">
+<var>${response}</var>
+<arg>admin</arg>
+<arg>song</arg>
+<doc>Convert payment with user credentials</doc>
+<kw name="Create List" library="BuiltIn">
+<var>${auth}</var>
+<arg>${user}</arg>
+<arg>${passwd}</arg>
+<doc>Returns a list containing given items.</doc>
+<msg timestamp="20220927 05:10:51.986" level="INFO">${auth} = ['admin', 'song']</msg>
+<status status="PASS" starttime="20220927 05:10:51.985" endtime="20220927 05:10:51.986"/>
+</kw>
+<kw name="Create Session" library="RequestsLibrary">
+<arg>paymentsession</arg>
+<arg>${URL}</arg>
+<arg>verify=true</arg>
+<arg>auth=${auth}</arg>
+<doc>Create Session: create a HTTP session to a server</doc>
+<msg timestamp="20220927 05:10:51.987" level="INFO">Creating Session using : alias=paymentsession, url=http://127.0.0.1:5000, headers={},                     cookies={}, auth=&lt;requests.auth.HTTPBasicAuth object at 0x7fce96a09a00&gt;, timeout=None, proxies=None, verify=True,                     debug=0 </msg>
+<status status="PASS" starttime="20220927 05:10:51.986" endtime="20220927 05:10:51.987"/>
+</kw>
+<kw name="Post Request" library="RequestsLibrary">
+<var>${response}</var>
+<arg>paymentsession</arg>
+<arg>${route}</arg>
+<doc>Send a POST request on the session object found using the
+given `alias`</doc>
+<msg timestamp="20220927 05:10:52.154" level="INFO">POST Request : url=http://127.0.0.1:5000/finance/api/v1.0/payments 
+ path_url=/finance/api/v1.0/payments 
+ headers={'User-Agent': 'python-requests/2.22.0', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive', 'Content-Length': '0', 'Authorization': 'Basic YWRtaW46c29uZw=='} 
+ body=None 
+ </msg>
+<msg timestamp="20220927 05:10:52.154" level="INFO">POST Response : url=http://127.0.0.1:5000/finance/api/v1.0/payments 
+ status=403, reason=FORBIDDEN 
+ body={
+  "error": "Unauthorized access"
+}
+ 
+ </msg>
+<msg timestamp="20220927 05:10:52.154" level="INFO">${response} = &lt;Response [403]&gt;</msg>
+<status status="PASS" starttime="20220927 05:10:51.988" endtime="20220927 05:10:52.154"/>
+</kw>
+<msg timestamp="20220927 05:10:52.154" level="INFO">${response} = &lt;Response [403]&gt;</msg>
+<status status="PASS" starttime="20220927 05:10:51.984" endtime="20220927 05:10:52.154"/>
+</kw>
+<kw name="Then Status Should Be" library="RequestsLibrary">
+<arg>403</arg>
+<arg>${response}</arg>
+<doc>Fails if response status code is different than the expected.</doc>
+<status status="PASS" starttime="20220927 05:10:52.154" endtime="20220927 05:10:52.154"/>
+</kw>
+<kw name="Web App test case teardown" library="CommonKeywords" type="TEARDOWN">
+<doc>Web App test case teardown</doc>
+<kw name="Reset" library="db_sqlite">
+<status status="PASS" starttime="20220927 05:10:52.155" endtime="20220927 05:10:52.828"/>
+</kw>
+<status status="PASS" starttime="20220927 05:10:52.155" endtime="20220927 05:10:52.829"/>
+</kw>
+<doc>Convert payment with admin user wrong password</doc>
+<tag>ConvertPayment Post</tag>
+<status status="PASS" starttime="20220927 05:10:51.714" endtime="20220927 05:10:52.829"/>
+</test>
+<test id="s1-s1-t5" name="TestID_Convert_Payments_With_Normal_User" line="63">
+<kw name="Create Dictionary" library="BuiltIn">
+<var>&amp;{body}</var>
+<arg>purchase=1001</arg>
+<arg>user=john</arg>
+<arg>amount=9000</arg>
+<arg>currency=USD</arg>
+<arg>completed=2</arg>
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<msg timestamp="20220927 05:10:52.832" level="INFO">&amp;{body} = { purchase=1001 | user=john | amount=9000 | currency=USD | completed=2 }</msg>
+<status status="PASS" starttime="20220927 05:10:52.831" endtime="20220927 05:10:52.832"/>
+</kw>
+<kw name="When I create payments with" library="CreatePaymentsKeywords">
+<arg>admin</arg>
+<arg>admin</arg>
+<arg>${body}</arg>
+<doc>Create payment with user credentials</doc>
+<kw name="Create List" library="BuiltIn">
+<var>${auth}</var>
+<arg>${user}</arg>
+<arg>${passwd}</arg>
+<doc>Returns a list containing given items.</doc>
+<msg timestamp="20220927 05:10:52.835" level="INFO">${auth} = ['admin', 'admin']</msg>
+<status status="PASS" starttime="20220927 05:10:52.834" endtime="20220927 05:10:52.835"/>
+</kw>
+<kw name="Create Session" library="RequestsLibrary">
+<arg>paymentsession</arg>
+<arg>${URL}</arg>
+<arg>verify=true</arg>
+<arg>auth=${auth}</arg>
+<doc>Create Session: create a HTTP session to a server</doc>
+<msg timestamp="20220927 05:10:52.836" level="INFO">Creating Session using : alias=paymentsession, url=http://127.0.0.1:5000, headers={},                     cookies={}, auth=&lt;requests.auth.HTTPBasicAuth object at 0x7fce96999070&gt;, timeout=None, proxies=None, verify=True,                     debug=0 </msg>
+<status status="PASS" starttime="20220927 05:10:52.835" endtime="20220927 05:10:52.837"/>
+</kw>
+<kw name="Put Request" library="RequestsLibrary">
+<var>${response}</var>
+<arg>paymentsession</arg>
+<arg>${route}</arg>
+<arg>json=${body}</arg>
+<doc>Send a PUT request on the session object found using the
+given `alias`</doc>
+<msg timestamp="20220927 05:10:53.082" level="INFO">PUT Request : url=http://127.0.0.1:5000/finance/api/v1.0/payments 
+ path_url=/finance/api/v1.0/payments 
+ headers={'User-Agent': 'python-requests/2.22.0', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive', 'Content-Length': '91', 'Content-Type': 'application/json', 'Authorization': 'Basic YWRtaW46YWRtaW4='} 
+ body=b'{"purchase": "1001", "user": "john", "amount": "9000", "currency": "USD", "completed": "2"}' 
+ </msg>
+<msg timestamp="20220927 05:10:53.082" level="INFO">PUT Response : url=http://127.0.0.1:5000/finance/api/v1.0/payments 
+ status=200, reason=OK 
+ body={
+  "created": 1
+}
+ 
+ </msg>
+<msg timestamp="20220927 05:10:53.082" level="INFO">${response} = &lt;Response [200]&gt;</msg>
+<status status="PASS" starttime="20220927 05:10:52.837" endtime="20220927 05:10:53.082"/>
+</kw>
+<status status="PASS" starttime="20220927 05:10:52.833" endtime="20220927 05:10:53.083"/>
+</kw>
+<kw name="Then I convert payments with" library="ConvertPaymentsKeywords">
+<var>${response}</var>
+<arg>john</arg>
+<arg>john</arg>
+<doc>Convert payment with user credentials</doc>
+<kw name="Create List" library="BuiltIn">
+<var>${auth}</var>
+<arg>${user}</arg>
+<arg>${passwd}</arg>
+<doc>Returns a list containing given items.</doc>
+<msg timestamp="20220927 05:10:53.084" level="INFO">${auth} = ['john', 'john']</msg>
+<status status="PASS" starttime="20220927 05:10:53.084" endtime="20220927 05:10:53.085"/>
+</kw>
+<kw name="Create Session" library="RequestsLibrary">
+<arg>paymentsession</arg>
+<arg>${URL}</arg>
+<arg>verify=true</arg>
+<arg>auth=${auth}</arg>
+<doc>Create Session: create a HTTP session to a server</doc>
+<msg timestamp="20220927 05:10:53.086" level="INFO">Creating Session using : alias=paymentsession, url=http://127.0.0.1:5000, headers={},                     cookies={}, auth=&lt;requests.auth.HTTPBasicAuth object at 0x7fce969992e0&gt;, timeout=None, proxies=None, verify=True,                     debug=0 </msg>
+<status status="PASS" starttime="20220927 05:10:53.085" endtime="20220927 05:10:53.086"/>
+</kw>
+<kw name="Post Request" library="RequestsLibrary">
+<var>${response}</var>
+<arg>paymentsession</arg>
+<arg>${route}</arg>
+<doc>Send a POST request on the session object found using the
+given `alias`</doc>
+<msg timestamp="20220927 05:10:53.360" level="INFO">POST Request : url=http://127.0.0.1:5000/finance/api/v1.0/payments 
+ path_url=/finance/api/v1.0/payments 
+ headers={'User-Agent': 'python-requests/2.22.0', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive', 'Content-Length': '0', 'Authorization': 'Basic am9objpqb2hu'} 
+ body=None 
+ </msg>
+<msg timestamp="20220927 05:10:53.360" level="INFO">POST Response : url=http://127.0.0.1:5000/finance/api/v1.0/payments 
+ status=200, reason=OK 
+ body={
+  "processed": 1
+}
+ 
+ </msg>
+<msg timestamp="20220927 05:10:53.360" level="INFO">${response} = &lt;Response [200]&gt;</msg>
+<status status="PASS" starttime="20220927 05:10:53.087" endtime="20220927 05:10:53.361"/>
+</kw>
+<msg timestamp="20220927 05:10:53.361" level="INFO">${response} = &lt;Response [200]&gt;</msg>
+<status status="PASS" starttime="20220927 05:10:53.083" endtime="20220927 05:10:53.361"/>
+</kw>
+<kw name="Then Status Should Be" library="RequestsLibrary">
+<arg>403</arg>
+<arg>${response}</arg>
+<doc>Fails if response status code is different than the expected.</doc>
+<msg timestamp="20220927 05:10:53.364" level="FAIL">Url: http://127.0.0.1:5000/finance/api/v1.0/payments Expected status: 200 != 403</msg>
+<status status="FAIL" starttime="20220927 05:10:53.362" endtime="20220927 05:10:53.366"/>
+</kw>
+<kw name="Web App test case teardown" library="CommonKeywords" type="TEARDOWN">
+<doc>Web App test case teardown</doc>
+<kw name="Reset" library="db_sqlite">
+<status status="PASS" starttime="20220927 05:10:53.369" endtime="20220927 05:10:53.841"/>
+</kw>
+<status status="PASS" starttime="20220927 05:10:53.368" endtime="20220927 05:10:53.842"/>
+</kw>
+<doc>Convert payment with admin user wrong password</doc>
+<tag>ConvertPayment Post</tag>
+<status status="FAIL" starttime="20220927 05:10:52.830" endtime="20220927 05:10:53.842">Url: http://127.0.0.1:5000/finance/api/v1.0/payments Expected status: 200 != 403</status>
+</test>
+<test id="s1-s1-t6" name="TestID_Convert_Payments_With_Wrong_Path" line="73">
+<kw name="Create Dictionary" library="BuiltIn">
+<var>&amp;{body}</var>
+<arg>purchase=1001</arg>
+<arg>user=john</arg>
+<arg>amount=9000</arg>
+<arg>currency=USD</arg>
+<arg>completed=2</arg>
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<msg timestamp="20220927 05:10:53.845" level="INFO">&amp;{body} = { purchase=1001 | user=john | amount=9000 | currency=USD | completed=2 }</msg>
+<status status="PASS" starttime="20220927 05:10:53.844" endtime="20220927 05:10:53.845"/>
+</kw>
+<kw name="When I create payments with" library="CreatePaymentsKeywords">
+<arg>admin</arg>
+<arg>admin</arg>
+<arg>${body}</arg>
+<doc>Create payment with user credentials</doc>
+<kw name="Create List" library="BuiltIn">
+<var>${auth}</var>
+<arg>${user}</arg>
+<arg>${passwd}</arg>
+<doc>Returns a list containing given items.</doc>
+<msg timestamp="20220927 05:10:53.847" level="INFO">${auth} = ['admin', 'admin']</msg>
+<status status="PASS" starttime="20220927 05:10:53.846" endtime="20220927 05:10:53.847"/>
+</kw>
+<kw name="Create Session" library="RequestsLibrary">
+<arg>paymentsession</arg>
+<arg>${URL}</arg>
+<arg>verify=true</arg>
+<arg>auth=${auth}</arg>
+<doc>Create Session: create a HTTP session to a server</doc>
+<msg timestamp="20220927 05:10:53.847" level="INFO">Creating Session using : alias=paymentsession, url=http://127.0.0.1:5000, headers={},                     cookies={}, auth=&lt;requests.auth.HTTPBasicAuth object at 0x7fce969c28b0&gt;, timeout=None, proxies=None, verify=True,                     debug=0 </msg>
+<status status="PASS" starttime="20220927 05:10:53.847" endtime="20220927 05:10:53.847"/>
+</kw>
+<kw name="Put Request" library="RequestsLibrary">
+<var>${response}</var>
+<arg>paymentsession</arg>
+<arg>${route}</arg>
+<arg>json=${body}</arg>
+<doc>Send a PUT request on the session object found using the
+given `alias`</doc>
+<msg timestamp="20220927 05:10:54.114" level="INFO">PUT Request : url=http://127.0.0.1:5000/finance/api/v1.0/payments 
+ path_url=/finance/api/v1.0/payments 
+ headers={'User-Agent': 'python-requests/2.22.0', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive', 'Content-Length': '91', 'Content-Type': 'application/json', 'Authorization': 'Basic YWRtaW46YWRtaW4='} 
+ body=b'{"purchase": "1001", "user": "john", "amount": "9000", "currency": "USD", "completed": "2"}' 
+ </msg>
+<msg timestamp="20220927 05:10:54.115" level="INFO">PUT Response : url=http://127.0.0.1:5000/finance/api/v1.0/payments 
+ status=200, reason=OK 
+ body={
+  "created": 1
+}
+ 
+ </msg>
+<msg timestamp="20220927 05:10:54.115" level="INFO">${response} = &lt;Response [200]&gt;</msg>
+<status status="PASS" starttime="20220927 05:10:53.847" endtime="20220927 05:10:54.115"/>
+</kw>
+<status status="PASS" starttime="20220927 05:10:53.846" endtime="20220927 05:10:54.115"/>
+</kw>
+<kw name="Then I convert payments with" library="ConvertPaymentsKeywords">
+<var>${response}</var>
+<arg>john</arg>
+<arg>john</arg>
+<arg>finance/api/v1.0/pay</arg>
+<doc>Convert payment with user credentials</doc>
+<kw name="Create List" library="BuiltIn">
+<var>${auth}</var>
+<arg>${user}</arg>
+<arg>${passwd}</arg>
+<doc>Returns a list containing given items.</doc>
+<msg timestamp="20220927 05:10:54.117" level="INFO">${auth} = ['john', 'john']</msg>
+<status status="PASS" starttime="20220927 05:10:54.117" endtime="20220927 05:10:54.118"/>
+</kw>
+<kw name="Create Session" library="RequestsLibrary">
+<arg>paymentsession</arg>
+<arg>${URL}</arg>
+<arg>verify=true</arg>
+<arg>auth=${auth}</arg>
+<doc>Create Session: create a HTTP session to a server</doc>
+<msg timestamp="20220927 05:10:54.119" level="INFO">Creating Session using : alias=paymentsession, url=http://127.0.0.1:5000, headers={},                     cookies={}, auth=&lt;requests.auth.HTTPBasicAuth object at 0x7fce969c89a0&gt;, timeout=None, proxies=None, verify=True,                     debug=0 </msg>
+<status status="PASS" starttime="20220927 05:10:54.118" endtime="20220927 05:10:54.119"/>
+</kw>
+<kw name="Post Request" library="RequestsLibrary">
+<var>${response}</var>
+<arg>paymentsession</arg>
+<arg>${route}</arg>
+<doc>Send a POST request on the session object found using the
+given `alias`</doc>
+<msg timestamp="20220927 05:10:54.128" level="INFO">POST Request : url=http://127.0.0.1:5000/finance/api/v1.0/pay 
+ path_url=/finance/api/v1.0/pay 
+ headers={'User-Agent': 'python-requests/2.22.0', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive', 'Content-Length': '0', 'Authorization': 'Basic am9objpqb2hu'} 
+ body=None 
+ </msg>
+<msg timestamp="20220927 05:10:54.129" level="INFO">POST Response : url=http://127.0.0.1:5000/finance/api/v1.0/pay 
+ status=404, reason=NOT FOUND 
+ body={
+  "error": "Not found"
+}
+ 
+ </msg>
+<msg timestamp="20220927 05:10:54.129" level="INFO">${response} = &lt;Response [404]&gt;</msg>
+<status status="PASS" starttime="20220927 05:10:54.120" endtime="20220927 05:10:54.129"/>
+</kw>
+<msg timestamp="20220927 05:10:54.129" level="INFO">${response} = &lt;Response [404]&gt;</msg>
+<status status="PASS" starttime="20220927 05:10:54.116" endtime="20220927 05:10:54.130"/>
+</kw>
+<kw name="Then Status Should Be" library="RequestsLibrary">
+<arg>404</arg>
+<arg>${response}</arg>
+<doc>Fails if response status code is different than the expected.</doc>
+<status status="PASS" starttime="20220927 05:10:54.130" endtime="20220927 05:10:54.131"/>
+</kw>
+<kw name="Web App test case teardown" library="CommonKeywords" type="TEARDOWN">
+<doc>Web App test case teardown</doc>
+<kw name="Reset" library="db_sqlite">
+<status status="PASS" starttime="20220927 05:10:54.131" endtime="20220927 05:10:54.832"/>
+</kw>
+<status status="PASS" starttime="20220927 05:10:54.131" endtime="20220927 05:10:54.833"/>
+</kw>
+<doc>Convert payment with admin user wrong password</doc>
+<tag>ConvertPayment Post</tag>
+<status status="PASS" starttime="20220927 05:10:53.843" endtime="20220927 05:10:54.833"/>
+</test>
+<doc>Test suite to Convert payments</doc>
+<status status="FAIL" starttime="20220927 05:10:47.154" endtime="20220927 05:10:54.835"/>
+</suite>
+<suite id="s1-s2" name="CreatePayments" source="/home/song/project/Assignment_Robot/Tests/CreatePayments.robot">
+<test id="s1-s2-t1" name="TestID_Create_Payments_Single_With_Admin" line="8">
+<kw name="Create Dictionary" library="BuiltIn">
+<var>&amp;{body}</var>
+<arg>purchase=1001</arg>
+<arg>user=john</arg>
+<arg>amount=9000</arg>
+<arg>currency=GBP</arg>
+<arg>completed=2</arg>
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<msg timestamp="20220927 05:10:54.853" level="INFO">&amp;{body} = { purchase=1001 | user=john | amount=9000 | currency=GBP | completed=2 }</msg>
+<status status="PASS" starttime="20220927 05:10:54.852" endtime="20220927 05:10:54.853"/>
+</kw>
+<kw name="When I create payments with" library="CreatePaymentsKeywords">
+<var>${response}</var>
+<arg>admin</arg>
+<arg>admin</arg>
+<arg>${body}</arg>
+<doc>Create payment with user credentials</doc>
+<kw name="Create List" library="BuiltIn">
+<var>${auth}</var>
+<arg>${user}</arg>
+<arg>${passwd}</arg>
+<doc>Returns a list containing given items.</doc>
+<msg timestamp="20220927 05:10:54.855" level="INFO">${auth} = ['admin', 'admin']</msg>
+<status status="PASS" starttime="20220927 05:10:54.854" endtime="20220927 05:10:54.855"/>
+</kw>
+<kw name="Create Session" library="RequestsLibrary">
+<arg>paymentsession</arg>
+<arg>${URL}</arg>
+<arg>verify=true</arg>
+<arg>auth=${auth}</arg>
+<doc>Create Session: create a HTTP session to a server</doc>
+<msg timestamp="20220927 05:10:54.856" level="INFO">Creating Session using : alias=paymentsession, url=http://127.0.0.1:5000, headers={},                     cookies={}, auth=&lt;requests.auth.HTTPBasicAuth object at 0x7fce9695b340&gt;, timeout=None, proxies=None, verify=True,                     debug=0 </msg>
+<status status="PASS" starttime="20220927 05:10:54.856" endtime="20220927 05:10:54.857"/>
+</kw>
+<kw name="Put Request" library="RequestsLibrary">
+<var>${response}</var>
+<arg>paymentsession</arg>
+<arg>${route}</arg>
+<arg>json=${body}</arg>
+<doc>Send a PUT request on the session object found using the
+given `alias`</doc>
+<msg timestamp="20220927 05:10:55.134" level="INFO">PUT Request : url=http://127.0.0.1:5000/finance/api/v1.0/payments 
+ path_url=/finance/api/v1.0/payments 
+ headers={'User-Agent': 'python-requests/2.22.0', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive', 'Content-Length': '91', 'Content-Type': 'application/json', 'Authorization': 'Basic YWRtaW46YWRtaW4='} 
+ body=b'{"purchase": "1001", "user": "john", "amount": "9000", "currency": "GBP", "completed": "2"}' 
+ </msg>
+<msg timestamp="20220927 05:10:55.134" level="INFO">PUT Response : url=http://127.0.0.1:5000/finance/api/v1.0/payments 
+ status=200, reason=OK 
+ body={
+  "created": 1
+}
+ 
+ </msg>
+<msg timestamp="20220927 05:10:55.135" level="INFO">${response} = &lt;Response [200]&gt;</msg>
+<status status="PASS" starttime="20220927 05:10:54.857" endtime="20220927 05:10:55.135"/>
+</kw>
+<msg timestamp="20220927 05:10:55.135" level="INFO">${response} = &lt;Response [200]&gt;</msg>
+<status status="PASS" starttime="20220927 05:10:54.854" endtime="20220927 05:10:55.135"/>
+</kw>
+<kw name="Then Status Should Be" library="RequestsLibrary">
+<arg>200</arg>
+<arg>${response}</arg>
+<doc>Fails if response status code is different than the expected.</doc>
+<status status="PASS" starttime="20220927 05:10:55.136" endtime="20220927 05:10:55.136"/>
+</kw>
+<kw name="And Should Be Equal As Integers" library="BuiltIn">
+<arg>${response.json()['created']}</arg>
+<arg>1</arg>
+<doc>Fails if objects are unequal after converting them to integers.</doc>
+<msg timestamp="20220927 05:10:55.138" level="INFO">Argument types are:
+&lt;class 'int'&gt;
+&lt;class 'str'&gt;</msg>
+<status status="PASS" starttime="20220927 05:10:55.137" endtime="20220927 05:10:55.138"/>
+</kw>
+<kw name="Then I get payments with" library="GetPaymentsKeywords">
+<var>${response}</var>
+<arg>admin</arg>
+<arg>admin</arg>
+<doc>Get payment with user credentials</doc>
+<kw name="Create List" library="BuiltIn">
+<var>${auth}</var>
+<arg>${user}</arg>
+<arg>${passwd}</arg>
+<doc>Returns a list containing given items.</doc>
+<msg timestamp="20220927 05:10:55.140" level="INFO">${auth} = ['admin', 'admin']</msg>
+<status status="PASS" starttime="20220927 05:10:55.139" endtime="20220927 05:10:55.140"/>
+</kw>
+<kw name="Create Session" library="RequestsLibrary">
+<arg>paymentsession</arg>
+<arg>${URL}</arg>
+<arg>verify=true</arg>
+<arg>auth=${auth}</arg>
+<doc>Create Session: create a HTTP session to a server</doc>
+<msg timestamp="20220927 05:10:55.140" level="INFO">Creating Session using : alias=paymentsession, url=http://127.0.0.1:5000, headers={},                     cookies={}, auth=&lt;requests.auth.HTTPBasicAuth object at 0x7fce969c2520&gt;, timeout=None, proxies=None, verify=True,                     debug=0 </msg>
+<status status="PASS" starttime="20220927 05:10:55.140" endtime="20220927 05:10:55.140"/>
+</kw>
+<kw name="Get Request" library="RequestsLibrary">
+<var>${response}</var>
+<arg>paymentsession</arg>
+<arg>${route}</arg>
+<doc>Send a GET request on the session object found using the
+given `alias`</doc>
+<msg timestamp="20220927 05:10:55.283" level="INFO">GET Request : url=http://127.0.0.1:5000/finance/api/v1.0/payments 
+ path_url=/finance/api/v1.0/payments 
+ headers={'User-Agent': 'python-requests/2.22.0', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive', 'Authorization': 'Basic YWRtaW46YWRtaW4='} 
+ body=None 
+ </msg>
+<msg timestamp="20220927 05:10:55.283" level="INFO">GET Response : url=http://127.0.0.1:5000/finance/api/v1.0/payments 
+ status=200, reason=OK 
+ body={
+  "payments": [
+    [
+      1,
+      12345,
+      "john",
+      12.5,
+      "EUR",
+      1
+    ],
+    [
+      2,
+      1001,
+      "admin",
+      9000.0,
+      "GBP",
+      0
+    ]
+  ]
+}
+ 
+ </msg>
+<msg timestamp="20220927 05:10:55.283" level="INFO">${response} = &lt;Response [200]&gt;</msg>
+<status status="PASS" starttime="20220927 05:10:55.141" endtime="20220927 05:10:55.283"/>
+</kw>
+<msg timestamp="20220927 05:10:55.284" level="INFO">${response} = &lt;Response [200]&gt;</msg>
+<status status="PASS" starttime="20220927 05:10:55.138" endtime="20220927 05:10:55.284"/>
+</kw>
+<kw name="And Status Should Be" library="RequestsLibrary">
+<arg>200</arg>
+<arg>${response}</arg>
+<doc>Fails if response status code is different than the expected.</doc>
+<status status="PASS" starttime="20220927 05:10:55.284" endtime="20220927 05:10:55.284"/>
+</kw>
+<kw name="And Payment should contain purchase" library="GetPaymentsKeywords">
+<arg>${response}</arg>
+<arg>1001</arg>
+<doc>Payment should contain specific purchase ID</doc>
+<kw name="Get Length" library="BuiltIn">
+<var>${PaymentLength}</var>
+<arg>${payment.json()['payments'][-1]}</arg>
+<doc>Returns and logs the length of the given item as an integer.</doc>
+<msg timestamp="20220927 05:10:55.285" level="INFO">Length is 6</msg>
+<msg timestamp="20220927 05:10:55.285" level="INFO">${PaymentLength} = 6</msg>
+<status status="PASS" starttime="20220927 05:10:55.284" endtime="20220927 05:10:55.285"/>
+</kw>
+<kw name="Should Be Equal As Integers" library="BuiltIn">
+<arg>${PaymentLength}</arg>
+<arg>6</arg>
+<doc>Fails if objects are unequal after converting them to integers.</doc>
+<msg timestamp="20220927 05:10:55.285" level="INFO">Argument types are:
+&lt;class 'int'&gt;
+&lt;class 'str'&gt;</msg>
+<status status="PASS" starttime="20220927 05:10:55.285" endtime="20220927 05:10:55.285"/>
+</kw>
+<kw name="Get From List" library="Collections">
+<var>${titleFromList}</var>
+<arg>${payment.json()['payments'][-1]}</arg>
+<arg>1</arg>
+<doc>Returns the value specified with an ``index`` from ``list``.</doc>
+<msg timestamp="20220927 05:10:55.286" level="INFO">${titleFromList} = 1001</msg>
+<status status="PASS" starttime="20220927 05:10:55.285" endtime="20220927 05:10:55.286"/>
+</kw>
+<kw name="Should Be Equal As Integers" library="BuiltIn">
+<arg>${titleFromList}</arg>
+<arg>${purchase}</arg>
+<doc>Fails if objects are unequal after converting them to integers.</doc>
+<msg timestamp="20220927 05:10:55.286" level="INFO">Argument types are:
+&lt;class 'int'&gt;
+&lt;class 'str'&gt;</msg>
+<status status="PASS" starttime="20220927 05:10:55.286" endtime="20220927 05:10:55.286"/>
+</kw>
+<status status="PASS" starttime="20220927 05:10:55.284" endtime="20220927 05:10:55.286"/>
+</kw>
+<kw name="Web App test case teardown" library="CommonKeywords" type="TEARDOWN">
+<doc>Web App test case teardown</doc>
+<kw name="Reset" library="db_sqlite">
+<status status="PASS" starttime="20220927 05:10:55.287" endtime="20220927 05:10:55.833"/>
+</kw>
+<status status="PASS" starttime="20220927 05:10:55.286" endtime="20220927 05:10:55.833"/>
+</kw>
+<doc>Create payment with admin user</doc>
+<tag>CreatePayment PUT</tag>
+<status status="PASS" starttime="20220927 05:10:54.851" endtime="20220927 05:10:55.834"/>
+</test>
+<test id="s1-s2-t2" name="TestID_Create_Payments_Single_With_Wrong_Password" line="21">
+<kw name="Create Dictionary" library="BuiltIn">
+<var>&amp;{body}</var>
+<arg>purchase=1001</arg>
+<arg>user=john</arg>
+<arg>amount=9000</arg>
+<arg>currency=GBP</arg>
+<arg>completed=2</arg>
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<msg timestamp="20220927 05:10:55.837" level="INFO">&amp;{body} = { purchase=1001 | user=john | amount=9000 | currency=GBP | completed=2 }</msg>
+<status status="PASS" starttime="20220927 05:10:55.836" endtime="20220927 05:10:55.837"/>
+</kw>
+<kw name="When I create payments with" library="CreatePaymentsKeywords">
+<var>${response}</var>
+<arg>admin</arg>
+<arg>song</arg>
+<arg>${body}</arg>
+<doc>Create payment with user credentials</doc>
+<kw name="Create List" library="BuiltIn">
+<var>${auth}</var>
+<arg>${user}</arg>
+<arg>${passwd}</arg>
+<doc>Returns a list containing given items.</doc>
+<msg timestamp="20220927 05:10:55.840" level="INFO">${auth} = ['admin', 'song']</msg>
+<status status="PASS" starttime="20220927 05:10:55.839" endtime="20220927 05:10:55.840"/>
+</kw>
+<kw name="Create Session" library="RequestsLibrary">
+<arg>paymentsession</arg>
+<arg>${URL}</arg>
+<arg>verify=true</arg>
+<arg>auth=${auth}</arg>
+<doc>Create Session: create a HTTP session to a server</doc>
+<msg timestamp="20220927 05:10:55.841" level="INFO">Creating Session using : alias=paymentsession, url=http://127.0.0.1:5000, headers={},                     cookies={}, auth=&lt;requests.auth.HTTPBasicAuth object at 0x7fce96974910&gt;, timeout=None, proxies=None, verify=True,                     debug=0 </msg>
+<status status="PASS" starttime="20220927 05:10:55.840" endtime="20220927 05:10:55.842"/>
+</kw>
+<kw name="Put Request" library="RequestsLibrary">
+<var>${response}</var>
+<arg>paymentsession</arg>
+<arg>${route}</arg>
+<arg>json=${body}</arg>
+<doc>Send a PUT request on the session object found using the
+given `alias`</doc>
+<msg timestamp="20220927 05:10:56.006" level="INFO">PUT Request : url=http://127.0.0.1:5000/finance/api/v1.0/payments 
+ path_url=/finance/api/v1.0/payments 
+ headers={'User-Agent': 'python-requests/2.22.0', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive', 'Content-Length': '91', 'Content-Type': 'application/json', 'Authorization': 'Basic YWRtaW46c29uZw=='} 
+ body=b'{"purchase": "1001", "user": "john", "amount": "9000", "currency": "GBP", "completed": "2"}' 
+ </msg>
+<msg timestamp="20220927 05:10:56.006" level="INFO">PUT Response : url=http://127.0.0.1:5000/finance/api/v1.0/payments 
+ status=403, reason=FORBIDDEN 
+ body={
+  "error": "Unauthorized access"
+}
+ 
+ </msg>
+<msg timestamp="20220927 05:10:56.006" level="INFO">${response} = &lt;Response [403]&gt;</msg>
+<status status="PASS" starttime="20220927 05:10:55.842" endtime="20220927 05:10:56.006"/>
+</kw>
+<msg timestamp="20220927 05:10:56.007" level="INFO">${response} = &lt;Response [403]&gt;</msg>
+<status status="PASS" starttime="20220927 05:10:55.838" endtime="20220927 05:10:56.007"/>
+</kw>
+<kw name="Then Status Should Be" library="RequestsLibrary">
+<arg>403</arg>
+<arg>${response}</arg>
+<doc>Fails if response status code is different than the expected.</doc>
+<status status="PASS" starttime="20220927 05:10:56.007" endtime="20220927 05:10:56.007"/>
+</kw>
+<kw name="Web App test case teardown" library="CommonKeywords" type="TEARDOWN">
+<doc>Web App test case teardown</doc>
+<kw name="Reset" library="db_sqlite">
+<status status="PASS" starttime="20220927 05:10:56.007" endtime="20220927 05:10:56.637"/>
+</kw>
+<status status="PASS" starttime="20220927 05:10:56.007" endtime="20220927 05:10:56.637"/>
+</kw>
+<doc>Create payment with admin user wrong password</doc>
+<tag>CreatePayment PUT</tag>
+<status status="PASS" starttime="20220927 05:10:55.835" endtime="20220927 05:10:56.637"/>
+</test>
+<test id="s1-s2-t3" name="TestID_Create_Payments_Single_With_John" line="30">
+<kw name="Create Dictionary" library="BuiltIn">
+<var>&amp;{body}</var>
+<arg>purchase=1001</arg>
+<arg>user=john</arg>
+<arg>amount=9000</arg>
+<arg>currency=GBP</arg>
+<arg>completed=2</arg>
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<msg timestamp="20220927 05:10:56.639" level="INFO">&amp;{body} = { purchase=1001 | user=john | amount=9000 | currency=GBP | completed=2 }</msg>
+<status status="PASS" starttime="20220927 05:10:56.638" endtime="20220927 05:10:56.639"/>
+</kw>
+<kw name="When I create payments with" library="CreatePaymentsKeywords">
+<var>${response}</var>
+<arg>song</arg>
+<arg>song</arg>
+<arg>${body}</arg>
+<doc>Create payment with user credentials</doc>
+<kw name="Create List" library="BuiltIn">
+<var>${auth}</var>
+<arg>${user}</arg>
+<arg>${passwd}</arg>
+<doc>Returns a list containing given items.</doc>
+<msg timestamp="20220927 05:10:56.640" level="INFO">${auth} = ['song', 'song']</msg>
+<status status="PASS" starttime="20220927 05:10:56.640" endtime="20220927 05:10:56.640"/>
+</kw>
+<kw name="Create Session" library="RequestsLibrary">
+<arg>paymentsession</arg>
+<arg>${URL}</arg>
+<arg>verify=true</arg>
+<arg>auth=${auth}</arg>
+<doc>Create Session: create a HTTP session to a server</doc>
+<msg timestamp="20220927 05:10:56.641" level="INFO">Creating Session using : alias=paymentsession, url=http://127.0.0.1:5000, headers={},                     cookies={}, auth=&lt;requests.auth.HTTPBasicAuth object at 0x7fce96974160&gt;, timeout=None, proxies=None, verify=True,                     debug=0 </msg>
+<status status="PASS" starttime="20220927 05:10:56.640" endtime="20220927 05:10:56.641"/>
+</kw>
+<kw name="Put Request" library="RequestsLibrary">
+<var>${response}</var>
+<arg>paymentsession</arg>
+<arg>${route}</arg>
+<arg>json=${body}</arg>
+<doc>Send a PUT request on the session object found using the
+given `alias`</doc>
+<msg timestamp="20220927 05:10:56.646" level="INFO">PUT Request : url=http://127.0.0.1:5000/finance/api/v1.0/payments 
+ path_url=/finance/api/v1.0/payments 
+ headers={'User-Agent': 'python-requests/2.22.0', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive', 'Content-Length': '91', 'Content-Type': 'application/json', 'Authorization': 'Basic c29uZzpzb25n'} 
+ body=b'{"purchase": "1001", "user": "john", "amount": "9000", "currency": "GBP", "completed": "2"}' 
+ </msg>
+<msg timestamp="20220927 05:10:56.646" level="INFO">PUT Response : url=http://127.0.0.1:5000/finance/api/v1.0/payments 
+ status=403, reason=FORBIDDEN 
+ body={
+  "error": "Unauthorized access"
+}
+ 
+ </msg>
+<msg timestamp="20220927 05:10:56.646" level="INFO">${response} = &lt;Response [403]&gt;</msg>
+<status status="PASS" starttime="20220927 05:10:56.641" endtime="20220927 05:10:56.646"/>
+</kw>
+<msg timestamp="20220927 05:10:56.647" level="INFO">${response} = &lt;Response [403]&gt;</msg>
+<status status="PASS" starttime="20220927 05:10:56.639" endtime="20220927 05:10:56.647"/>
+</kw>
+<kw name="Then Status Should Be" library="RequestsLibrary">
+<arg>403</arg>
+<arg>${response}</arg>
+<doc>Fails if response status code is different than the expected.</doc>
+<status status="PASS" starttime="20220927 05:10:56.647" endtime="20220927 05:10:56.647"/>
+</kw>
+<kw name="Web App test case teardown" library="CommonKeywords" type="TEARDOWN">
+<doc>Web App test case teardown</doc>
+<kw name="Reset" library="db_sqlite">
+<status status="PASS" starttime="20220927 05:10:56.648" endtime="20220927 05:10:57.153"/>
+</kw>
+<status status="PASS" starttime="20220927 05:10:56.647" endtime="20220927 05:10:57.153"/>
+</kw>
+<doc>Create payment with john user</doc>
+<tag>CreatePayment PUT</tag>
+<status status="PASS" starttime="20220927 05:10:56.637" endtime="20220927 05:10:57.153"/>
+</test>
+<test id="s1-s2-t4" name="TestID_Create_Payments_Single_With_Non_User" line="39">
+<kw name="Create Dictionary" library="BuiltIn">
+<var>&amp;{body}</var>
+<arg>purchase=1001</arg>
+<arg>user=john</arg>
+<arg>amount=9000</arg>
+<arg>currency=GBP</arg>
+<arg>completed=2</arg>
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<msg timestamp="20220927 05:10:57.154" level="INFO">&amp;{body} = { purchase=1001 | user=john | amount=9000 | currency=GBP | completed=2 }</msg>
+<status status="PASS" starttime="20220927 05:10:57.154" endtime="20220927 05:10:57.154"/>
+</kw>
+<kw name="When I create payments with" library="CreatePaymentsKeywords">
+<var>${response}</var>
+<arg>song</arg>
+<arg>song</arg>
+<arg>${body}</arg>
+<doc>Create payment with user credentials</doc>
+<kw name="Create List" library="BuiltIn">
+<var>${auth}</var>
+<arg>${user}</arg>
+<arg>${passwd}</arg>
+<doc>Returns a list containing given items.</doc>
+<msg timestamp="20220927 05:10:57.155" level="INFO">${auth} = ['song', 'song']</msg>
+<status status="PASS" starttime="20220927 05:10:57.155" endtime="20220927 05:10:57.155"/>
+</kw>
+<kw name="Create Session" library="RequestsLibrary">
+<arg>paymentsession</arg>
+<arg>${URL}</arg>
+<arg>verify=true</arg>
+<arg>auth=${auth}</arg>
+<doc>Create Session: create a HTTP session to a server</doc>
+<msg timestamp="20220927 05:10:57.156" level="INFO">Creating Session using : alias=paymentsession, url=http://127.0.0.1:5000, headers={},                     cookies={}, auth=&lt;requests.auth.HTTPBasicAuth object at 0x7fce969801c0&gt;, timeout=None, proxies=None, verify=True,                     debug=0 </msg>
+<status status="PASS" starttime="20220927 05:10:57.155" endtime="20220927 05:10:57.156"/>
+</kw>
+<kw name="Put Request" library="RequestsLibrary">
+<var>${response}</var>
+<arg>paymentsession</arg>
+<arg>${route}</arg>
+<arg>json=${body}</arg>
+<doc>Send a PUT request on the session object found using the
+given `alias`</doc>
+<msg timestamp="20220927 05:10:57.160" level="INFO">PUT Request : url=http://127.0.0.1:5000/finance/api/v1.0/payments 
+ path_url=/finance/api/v1.0/payments 
+ headers={'User-Agent': 'python-requests/2.22.0', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive', 'Content-Length': '91', 'Content-Type': 'application/json', 'Authorization': 'Basic c29uZzpzb25n'} 
+ body=b'{"purchase": "1001", "user": "john", "amount": "9000", "currency": "GBP", "completed": "2"}' 
+ </msg>
+<msg timestamp="20220927 05:10:57.160" level="INFO">PUT Response : url=http://127.0.0.1:5000/finance/api/v1.0/payments 
+ status=403, reason=FORBIDDEN 
+ body={
+  "error": "Unauthorized access"
+}
+ 
+ </msg>
+<msg timestamp="20220927 05:10:57.160" level="INFO">${response} = &lt;Response [403]&gt;</msg>
+<status status="PASS" starttime="20220927 05:10:57.156" endtime="20220927 05:10:57.160"/>
+</kw>
+<msg timestamp="20220927 05:10:57.160" level="INFO">${response} = &lt;Response [403]&gt;</msg>
+<status status="PASS" starttime="20220927 05:10:57.154" endtime="20220927 05:10:57.160"/>
+</kw>
+<kw name="Then Status Should Be" library="RequestsLibrary">
+<arg>403</arg>
+<arg>${response}</arg>
+<doc>Fails if response status code is different than the expected.</doc>
+<status status="PASS" starttime="20220927 05:10:57.161" endtime="20220927 05:10:57.161"/>
+</kw>
+<kw name="Web App test case teardown" library="CommonKeywords" type="TEARDOWN">
+<doc>Web App test case teardown</doc>
+<kw name="Reset" library="db_sqlite">
+<status status="PASS" starttime="20220927 05:10:57.161" endtime="20220927 05:10:57.753"/>
+</kw>
+<status status="PASS" starttime="20220927 05:10:57.161" endtime="20220927 05:10:57.753"/>
+</kw>
+<doc>Create payment with Non exsitent user</doc>
+<tag>CreatePayment PUT</tag>
+<status status="PASS" starttime="20220927 05:10:57.153" endtime="20220927 05:10:57.753"/>
+</test>
+<test id="s1-s2-t5" name="TestID_Create_Payments_Single_With_Missing_Amount" line="48">
+<kw name="Create Dictionary" library="BuiltIn">
+<var>&amp;{body}</var>
+<arg>purchase=1001</arg>
+<arg>user=john</arg>
+<arg>currency=GBP</arg>
+<arg>completed=2</arg>
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<msg timestamp="20220927 05:10:57.754" level="INFO">&amp;{body} = { purchase=1001 | user=john | currency=GBP | completed=2 }</msg>
+<status status="PASS" starttime="20220927 05:10:57.754" endtime="20220927 05:10:57.754"/>
+</kw>
+<kw name="When I create payments with" library="CreatePaymentsKeywords">
+<var>${response}</var>
+<arg>admin</arg>
+<arg>admin</arg>
+<arg>${body}</arg>
+<doc>Create payment with user credentials</doc>
+<kw name="Create List" library="BuiltIn">
+<var>${auth}</var>
+<arg>${user}</arg>
+<arg>${passwd}</arg>
+<doc>Returns a list containing given items.</doc>
+<msg timestamp="20220927 05:10:57.755" level="INFO">${auth} = ['admin', 'admin']</msg>
+<status status="PASS" starttime="20220927 05:10:57.755" endtime="20220927 05:10:57.755"/>
+</kw>
+<kw name="Create Session" library="RequestsLibrary">
+<arg>paymentsession</arg>
+<arg>${URL}</arg>
+<arg>verify=true</arg>
+<arg>auth=${auth}</arg>
+<doc>Create Session: create a HTTP session to a server</doc>
+<msg timestamp="20220927 05:10:57.756" level="INFO">Creating Session using : alias=paymentsession, url=http://127.0.0.1:5000, headers={},                     cookies={}, auth=&lt;requests.auth.HTTPBasicAuth object at 0x7fce9695bb80&gt;, timeout=None, proxies=None, verify=True,                     debug=0 </msg>
+<status status="PASS" starttime="20220927 05:10:57.755" endtime="20220927 05:10:57.756"/>
+</kw>
+<kw name="Put Request" library="RequestsLibrary">
+<var>${response}</var>
+<arg>paymentsession</arg>
+<arg>${route}</arg>
+<arg>json=${body}</arg>
+<doc>Send a PUT request on the session object found using the
+given `alias`</doc>
+<msg timestamp="20220927 05:10:57.925" level="INFO">PUT Request : url=http://127.0.0.1:5000/finance/api/v1.0/payments 
+ path_url=/finance/api/v1.0/payments 
+ headers={'User-Agent': 'python-requests/2.22.0', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive', 'Content-Length': '73', 'Content-Type': 'application/json', 'Authorization': 'Basic YWRtaW46YWRtaW4='} 
+ body=b'{"purchase": "1001", "user": "john", "currency": "GBP", "completed": "2"}' 
+ </msg>
+<msg timestamp="20220927 05:10:57.925" level="INFO">PUT Response : url=http://127.0.0.1:5000/finance/api/v1.0/payments 
+ status=400, reason=BAD REQUEST 
+ body={
+  "error": "Bad request"
+}
+ 
+ </msg>
+<msg timestamp="20220927 05:10:57.925" level="INFO">${response} = &lt;Response [400]&gt;</msg>
+<status status="PASS" starttime="20220927 05:10:57.757" endtime="20220927 05:10:57.925"/>
+</kw>
+<msg timestamp="20220927 05:10:57.926" level="INFO">${response} = &lt;Response [400]&gt;</msg>
+<status status="PASS" starttime="20220927 05:10:57.754" endtime="20220927 05:10:57.926"/>
+</kw>
+<kw name="Then Status Should Be" library="RequestsLibrary">
+<arg>400</arg>
+<arg>${response}</arg>
+<doc>Fails if response status code is different than the expected.</doc>
+<status status="PASS" starttime="20220927 05:10:57.926" endtime="20220927 05:10:57.926"/>
+</kw>
+<kw name="Web App test case teardown" library="CommonKeywords" type="TEARDOWN">
+<doc>Web App test case teardown</doc>
+<kw name="Reset" library="db_sqlite">
+<status status="PASS" starttime="20220927 05:10:57.926" endtime="20220927 05:10:58.449"/>
+</kw>
+<status status="PASS" starttime="20220927 05:10:57.926" endtime="20220927 05:10:58.449"/>
+</kw>
+<doc>Create payment with missing amount</doc>
+<tag>CreatePayment PUT</tag>
+<status status="PASS" starttime="20220927 05:10:57.753" endtime="20220927 05:10:58.450"/>
+</test>
+<test id="s1-s2-t6" name="TestID_Create_Payments_Single_With_Empty_Body" line="57">
+<kw name="Create Dictionary" library="BuiltIn">
+<var>&amp;{body}</var>
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<msg timestamp="20220927 05:10:58.454" level="INFO">&amp;{body} = { }</msg>
+<status status="PASS" starttime="20220927 05:10:58.453" endtime="20220927 05:10:58.454"/>
+</kw>
+<kw name="When I create payments with" library="CreatePaymentsKeywords">
+<var>${response}</var>
+<arg>admin</arg>
+<arg>admin</arg>
+<arg>${body}</arg>
+<doc>Create payment with user credentials</doc>
+<kw name="Create List" library="BuiltIn">
+<var>${auth}</var>
+<arg>${user}</arg>
+<arg>${passwd}</arg>
+<doc>Returns a list containing given items.</doc>
+<msg timestamp="20220927 05:10:58.457" level="INFO">${auth} = ['admin', 'admin']</msg>
+<status status="PASS" starttime="20220927 05:10:58.456" endtime="20220927 05:10:58.457"/>
+</kw>
+<kw name="Create Session" library="RequestsLibrary">
+<arg>paymentsession</arg>
+<arg>${URL}</arg>
+<arg>verify=true</arg>
+<arg>auth=${auth}</arg>
+<doc>Create Session: create a HTTP session to a server</doc>
+<msg timestamp="20220927 05:10:58.458" level="INFO">Creating Session using : alias=paymentsession, url=http://127.0.0.1:5000, headers={},                     cookies={}, auth=&lt;requests.auth.HTTPBasicAuth object at 0x7fce9698e130&gt;, timeout=None, proxies=None, verify=True,                     debug=0 </msg>
+<status status="PASS" starttime="20220927 05:10:58.457" endtime="20220927 05:10:58.459"/>
+</kw>
+<kw name="Put Request" library="RequestsLibrary">
+<var>${response}</var>
+<arg>paymentsession</arg>
+<arg>${route}</arg>
+<arg>json=${body}</arg>
+<doc>Send a PUT request on the session object found using the
+given `alias`</doc>
+<msg timestamp="20220927 05:10:58.627" level="INFO">PUT Request : url=http://127.0.0.1:5000/finance/api/v1.0/payments 
+ path_url=/finance/api/v1.0/payments 
+ headers={'User-Agent': 'python-requests/2.22.0', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive', 'Content-Length': '2', 'Content-Type': 'application/json', 'Authorization': 'Basic YWRtaW46YWRtaW4='} 
+ body=b'{}' 
+ </msg>
+<msg timestamp="20220927 05:10:58.628" level="INFO">PUT Response : url=http://127.0.0.1:5000/finance/api/v1.0/payments 
+ status=400, reason=BAD REQUEST 
+ body={
+  "error": "Bad request"
+}
+ 
+ </msg>
+<msg timestamp="20220927 05:10:58.628" level="INFO">${response} = &lt;Response [400]&gt;</msg>
+<status status="PASS" starttime="20220927 05:10:58.459" endtime="20220927 05:10:58.628"/>
+</kw>
+<msg timestamp="20220927 05:10:58.628" level="INFO">${response} = &lt;Response [400]&gt;</msg>
+<status status="PASS" starttime="20220927 05:10:58.454" endtime="20220927 05:10:58.628"/>
+</kw>
+<kw name="Then Status Should Be" library="RequestsLibrary">
+<arg>400</arg>
+<arg>${response}</arg>
+<doc>Fails if response status code is different than the expected.</doc>
+<status status="PASS" starttime="20220927 05:10:58.628" endtime="20220927 05:10:58.629"/>
+</kw>
+<kw name="Web App test case teardown" library="CommonKeywords" type="TEARDOWN">
+<doc>Web App test case teardown</doc>
+<kw name="Reset" library="db_sqlite">
+<status status="PASS" starttime="20220927 05:10:58.629" endtime="20220927 05:10:59.229"/>
+</kw>
+<status status="PASS" starttime="20220927 05:10:58.629" endtime="20220927 05:10:59.230"/>
+</kw>
+<doc>Create payment with empty Body</doc>
+<tag>CreatePayment PUT</tag>
+<status status="PASS" starttime="20220927 05:10:58.451" endtime="20220927 05:10:59.230"/>
+</test>
+<test id="s1-s2-t7" name="TestID_Create_Payments_Single_With_Wrong_Currency" line="66">
+<kw name="Create Dictionary" library="BuiltIn">
+<var>&amp;{body}</var>
+<arg>purchase=1001</arg>
+<arg>user=john</arg>
+<arg>amount=9000</arg>
+<arg>currency=RMB</arg>
+<arg>completed=2</arg>
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<msg timestamp="20220927 05:10:59.233" level="INFO">&amp;{body} = { purchase=1001 | user=john | amount=9000 | currency=RMB | completed=2 }</msg>
+<status status="PASS" starttime="20220927 05:10:59.232" endtime="20220927 05:10:59.233"/>
+</kw>
+<kw name="When I create payments with" library="CreatePaymentsKeywords">
+<var>${response}</var>
+<arg>admin</arg>
+<arg>admin</arg>
+<arg>${body}</arg>
+<doc>Create payment with user credentials</doc>
+<kw name="Create List" library="BuiltIn">
+<var>${auth}</var>
+<arg>${user}</arg>
+<arg>${passwd}</arg>
+<doc>Returns a list containing given items.</doc>
+<msg timestamp="20220927 05:10:59.237" level="INFO">${auth} = ['admin', 'admin']</msg>
+<status status="PASS" starttime="20220927 05:10:59.236" endtime="20220927 05:10:59.237"/>
+</kw>
+<kw name="Create Session" library="RequestsLibrary">
+<arg>paymentsession</arg>
+<arg>${URL}</arg>
+<arg>verify=true</arg>
+<arg>auth=${auth}</arg>
+<doc>Create Session: create a HTTP session to a server</doc>
+<msg timestamp="20220927 05:10:59.239" level="INFO">Creating Session using : alias=paymentsession, url=http://127.0.0.1:5000, headers={},                     cookies={}, auth=&lt;requests.auth.HTTPBasicAuth object at 0x7fce96987790&gt;, timeout=None, proxies=None, verify=True,                     debug=0 </msg>
+<status status="PASS" starttime="20220927 05:10:59.238" endtime="20220927 05:10:59.239"/>
+</kw>
+<kw name="Put Request" library="RequestsLibrary">
+<var>${response}</var>
+<arg>paymentsession</arg>
+<arg>${route}</arg>
+<arg>json=${body}</arg>
+<doc>Send a PUT request on the session object found using the
+given `alias`</doc>
+<msg timestamp="20220927 05:10:59.490" level="INFO">PUT Request : url=http://127.0.0.1:5000/finance/api/v1.0/payments 
+ path_url=/finance/api/v1.0/payments 
+ headers={'User-Agent': 'python-requests/2.22.0', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive', 'Content-Length': '91', 'Content-Type': 'application/json', 'Authorization': 'Basic YWRtaW46YWRtaW4='} 
+ body=b'{"purchase": "1001", "user": "john", "amount": "9000", "currency": "RMB", "completed": "2"}' 
+ </msg>
+<msg timestamp="20220927 05:10:59.491" level="INFO">PUT Response : url=http://127.0.0.1:5000/finance/api/v1.0/payments 
+ status=200, reason=OK 
+ body={
+  "created": 1
+}
+ 
+ </msg>
+<msg timestamp="20220927 05:10:59.491" level="INFO">${response} = &lt;Response [200]&gt;</msg>
+<status status="PASS" starttime="20220927 05:10:59.240" endtime="20220927 05:10:59.491"/>
+</kw>
+<msg timestamp="20220927 05:10:59.492" level="INFO">${response} = &lt;Response [200]&gt;</msg>
+<status status="PASS" starttime="20220927 05:10:59.234" endtime="20220927 05:10:59.492"/>
+</kw>
+<kw name="Then Status Should Be" library="RequestsLibrary">
+<arg>400</arg>
+<arg>${response}</arg>
+<doc>Fails if response status code is different than the expected.</doc>
+<msg timestamp="20220927 05:10:59.494" level="FAIL">Url: http://127.0.0.1:5000/finance/api/v1.0/payments Expected status: 200 != 400</msg>
+<status status="FAIL" starttime="20220927 05:10:59.493" endtime="20220927 05:10:59.494"/>
+</kw>
+<kw name="Web App test case teardown" library="CommonKeywords" type="TEARDOWN">
+<doc>Web App test case teardown</doc>
+<kw name="Reset" library="db_sqlite">
+<status status="PASS" starttime="20220927 05:10:59.496" endtime="20220927 05:11:00.621"/>
+</kw>
+<status status="PASS" starttime="20220927 05:10:59.495" endtime="20220927 05:11:00.622"/>
+</kw>
+<doc>Create payment with wrong currency</doc>
+<tag>CreatePayment PUT</tag>
+<status status="FAIL" starttime="20220927 05:10:59.231" endtime="20220927 05:11:00.622">Url: http://127.0.0.1:5000/finance/api/v1.0/payments Expected status: 200 != 400</status>
+</test>
+<test id="s1-s2-t8" name="TestID_Create_Payments_Single_With_Amount_String" line="75">
+<kw name="Create Dictionary" library="BuiltIn">
+<var>&amp;{body}</var>
+<arg>purchase=1001</arg>
+<arg>user=john</arg>
+<arg>amount=abc</arg>
+<arg>currency=RMB</arg>
+<arg>completed=2</arg>
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<msg timestamp="20220927 05:11:00.626" level="INFO">&amp;{body} = { purchase=1001 | user=john | amount=abc | currency=RMB | completed=2 }</msg>
+<status status="PASS" starttime="20220927 05:11:00.625" endtime="20220927 05:11:00.626"/>
+</kw>
+<kw name="When I create payments with" library="CreatePaymentsKeywords">
+<var>${response}</var>
+<arg>admin</arg>
+<arg>admin</arg>
+<arg>${body}</arg>
+<doc>Create payment with user credentials</doc>
+<kw name="Create List" library="BuiltIn">
+<var>${auth}</var>
+<arg>${user}</arg>
+<arg>${passwd}</arg>
+<doc>Returns a list containing given items.</doc>
+<msg timestamp="20220927 05:11:00.629" level="INFO">${auth} = ['admin', 'admin']</msg>
+<status status="PASS" starttime="20220927 05:11:00.628" endtime="20220927 05:11:00.629"/>
+</kw>
+<kw name="Create Session" library="RequestsLibrary">
+<arg>paymentsession</arg>
+<arg>${URL}</arg>
+<arg>verify=true</arg>
+<arg>auth=${auth}</arg>
+<doc>Create Session: create a HTTP session to a server</doc>
+<msg timestamp="20220927 05:11:00.630" level="INFO">Creating Session using : alias=paymentsession, url=http://127.0.0.1:5000, headers={},                     cookies={}, auth=&lt;requests.auth.HTTPBasicAuth object at 0x7fce96915130&gt;, timeout=None, proxies=None, verify=True,                     debug=0 </msg>
+<status status="PASS" starttime="20220927 05:11:00.629" endtime="20220927 05:11:00.630"/>
+</kw>
+<kw name="Put Request" library="RequestsLibrary">
+<var>${response}</var>
+<arg>paymentsession</arg>
+<arg>${route}</arg>
+<arg>json=${body}</arg>
+<doc>Send a PUT request on the session object found using the
+given `alias`</doc>
+<msg timestamp="20220927 05:11:00.795" level="INFO">PUT Request : url=http://127.0.0.1:5000/finance/api/v1.0/payments 
+ path_url=/finance/api/v1.0/payments 
+ headers={'User-Agent': 'python-requests/2.22.0', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive', 'Content-Length': '90', 'Content-Type': 'application/json', 'Authorization': 'Basic YWRtaW46YWRtaW4='} 
+ body=b'{"purchase": "1001", "user": "john", "amount": "abc", "currency": "RMB", "completed": "2"}' 
+ </msg>
+<msg timestamp="20220927 05:11:00.795" level="INFO">PUT Response : url=http://127.0.0.1:5000/finance/api/v1.0/payments 
+ status=500, reason=INTERNAL SERVER ERROR 
+ body=&lt;!doctype html&gt;
+&lt;html lang=en&gt;
+  &lt;head&gt;
+    &lt;title&gt;sqlite3.OperationalError: no such column: abc
+ // Werkzeug Debugger&lt;/title&gt;
+    &lt;link rel="stylesheet" href="?__debugger__=yes&amp;amp;cmd=resource&amp;amp;f=style.css"&gt;
+    &lt;link rel="shortcut icon"
+        href="?__debugger__=yes&amp;amp;cmd=resource&amp;amp;f=console.png"&gt;
+    &lt;script src="?__debugger__=yes&amp;amp;cmd=resource&amp;amp;f=debugger.js"&gt;&lt;/script&gt;
+    &lt;script&gt;
+      var CONSOLE_MODE = false,
+          EVALEX = true,
+          EVALEX_TRUSTED = false,
+          SECRET = "mML4jnpzqdYrj6uLa5bU";
+    &lt;/script&gt;
+  &lt;/head&gt;
+  &lt;body style="background-color: #fff"&gt;
+    &lt;div class="debugger"&gt;
+&lt;h1&gt;OperationalError&lt;/h1&gt;
+&lt;div class="detail"&gt;
+  &lt;p class="errormsg"&gt;sqlite3.OperationalError: no such column: abc
+&lt;/p&gt;
+&lt;/div&gt;
+&lt;h2 class="traceback"&gt;Traceback &lt;em&gt;(most recent call last)&lt;/em&gt;&lt;/h2&gt;
+&lt;div class="traceback"&gt;
+  &lt;h3&gt;&lt;/h3&gt;
+  &lt;ul&gt;&lt;li&gt;&lt;div class="frame" id="frame-140602003836704"&gt;
+  &lt;h4&gt;File &lt;cite class="filename"&gt;"/home/song/.local/lib/python3.8/site-packages/flask/app.py"&lt;/cite&gt;,
+      line &lt;em class="line"&gt;2548&lt;/em&gt;,
+      in &lt;code class="function"&gt;__call__&lt;/code&gt;&lt;/h4&gt;
+  &lt;div class="source "&gt;&lt;pre class="line before"&gt;&lt;span class="ws"&gt;    &lt;/span&gt;def __call__(self, environ: dict, start_response: t.Callable) -&amp;gt; t.Any:&lt;/pre&gt;
+&lt;pre class="line before"&gt;&lt;span class="ws"&gt;        &lt;/span&gt;&amp;#34;&amp;#34;&amp;#34;The WSGI server calls the Flask application object as the&lt;/pre&gt;
+&lt;pre class="line before"&gt;&lt;span class="ws"&gt;        &lt;/span&gt;WSGI application. This calls :meth:`wsgi_app`, which can be&lt;/pre&gt;
+&lt;pre class="line before"&gt;&lt;span class="ws"&gt;        &lt;/span&gt;wrapped to apply middleware.&lt;/pre&gt;
+&lt;pre class="line before"&gt;&lt;span class="ws"&gt;        &lt;/span&gt;&amp;#34;&amp;#34;&amp;#34;&lt;/pre&gt;
+&lt;pre class="line current"&gt;&lt;span class="ws"&gt;        &lt;/span&gt;return self.wsgi_app(environ, start_response)&lt;/pre&gt;&lt;/div&gt;
+&lt;/div&gt;
+
+&lt;li&gt;&lt;div class="frame" id="frame-140602003834576"&gt;
+  &lt;h4&gt;File &lt;cite class="filename"&gt;"/home/song/.local/lib/python3.8/site-packages/flask/app.py"&lt;/cite&gt;,
+      line &lt;em class="line"&gt;2528&lt;/em&gt;,
+      in &lt;code class="function"&gt;wsgi_app&lt;/code&gt;&lt;/h4&gt;
+  &lt;div class="source "&gt;&lt;pre class="line before"&gt;&lt;span class="ws"&gt;            &lt;/span&gt;try:&lt;/pre&gt;
+&lt;pre class="line before"&gt;&lt;span class="ws"&gt;                &lt;/span&gt;ctx.push()&lt;/pre&gt;
+&lt;pre class="line before"&gt;&lt;span class="ws"&gt;                &lt;/span&gt;response = self.full_dispatch_request()&lt;/pre&gt;
+&lt;pre class="line before"&gt;&lt;span class="ws"&gt;            &lt;/span&gt;except Exception as e:&lt;/pre&gt;
+&lt;pre class="line before"&gt;&lt;span class="ws"&gt;                &lt;/span&gt;error = e&lt;/pre&gt;
+&lt;pre class="line current"&gt;&lt;span class="ws"&gt;                &lt;/span&gt;response = self.handle_exception(e)&lt;/pre&gt;
+&lt;pre class="line after"&gt;&lt;span class="ws"&gt;            &lt;/span&gt;except:  # noqa: B001&lt;/pre&gt;
+&lt;pre class="line after"&gt;&lt;span class="ws"&gt;                &lt;/span&gt;error = sys.exc_info()[1]&lt;/pre&gt;
+&lt;pre class="line after"&gt;&lt;span class="ws"&gt;                &lt;/span&gt;raise&lt;/pre&gt;
+&lt;pre class="line after"&gt;&lt;span class="ws"&gt;            &lt;/span&gt;return response(environ, start_response)&lt;/pre&gt;
+&lt;pre class="line after"&gt;&lt;span class="ws"&gt;        &lt;/span&gt;finally:&lt;/pre&gt;&lt;/div&gt;
+&lt;/div&gt;
+
+&lt;li&gt;&lt;div class="frame" id="frame-140602003833456"&gt;
+  &lt;h4&gt;File &lt;cite class="filename"&gt;"/home/song/.local/lib/python3.8/site-packages/flask/app.py"&lt;/cite&gt;,
+      line &lt;em class="line"&gt;2525&lt;/em&gt;,
+      in &lt;code class="function"&gt;wsgi_app&lt;/code&gt;&lt;/h4&gt;
+  &lt;div class="source "&gt;&lt;pre class="line before"&gt;&lt;span class="ws"&gt;        &lt;/span&gt;ctx = self.request_context(environ)&lt;/pre&gt;
+&lt;pre class="line before"&gt;&lt;span class="ws"&gt;        &lt;/span&gt;error: t.Optional[BaseException] = None&lt;/pre&gt;
+&lt;pre class="line before"&gt;&lt;span class="ws"&gt;        &lt;/span&gt;try:&lt;/pre&gt;
+&lt;pre class="line before"&gt;&lt;span class="ws"&gt;            &lt;/span&gt;try:&lt;/pre&gt;
+&lt;pre class="line before"&gt;&lt;span class="ws"&gt;                &lt;/span&gt;ctx.push()&lt;/pre&gt;
+&lt;pre class="line current"&gt;&lt;span class="ws"&gt;                &lt;/span&gt;response = self.full_dispatch_request()&lt;/pre&gt;
+&lt;pre class="line after"&gt;&lt;span class="ws"&gt;            &lt;/span&gt;except Exception as e:&lt;/pre&gt;
+&lt;pre class="line after"&gt;&lt;span class="ws"&gt;                &lt;/span&gt;error = e&lt;/pre&gt;
+&lt;pre class="line after"&gt;&lt;span class="ws"&gt;                &lt;/span&gt;response = self.handle_exception(e)&lt;/pre&gt;
+&lt;pre class="line after"&gt;&lt;span class="ws"&gt;            &lt;/span&gt;except:  # noqa: B001&lt;/pre&gt;
+&lt;pre class="line after"&gt;&lt;span class="ws"&gt;                &lt;/span&gt;error = sys.exc_info()[1]&lt;/pre&gt;&lt;/div&gt;
+&lt;/div&gt;
+
+&lt;li&gt;&lt;div class="frame" id="frame-140602003834352"&gt;
+  &lt;h4&gt;File &lt;cite class="filename"&gt;"/home/song/.local/lib/python3.8/site-packages/flask/app.py"&lt;/cite&gt;,
+      line &lt;em class="line"&gt;1822&lt;/em&gt;,
+      in &lt;code class="function"&gt;full_dispatch_request&lt;/code&gt;&lt;/h4&gt;
+  &lt;div class="source "&gt;&lt;pre class="line before"&gt;&lt;span class="ws"&gt;            &lt;/span&gt;request_started.send(self)&lt;/pre&gt;
+&lt;pre class="line before"&gt;&lt;span class="ws"&gt;            &lt;/span&gt;rv = self.preprocess_request()&lt;/pre&gt;
+&lt;pre class="line before"&gt;&lt;span class="ws"&gt;            &lt;/span&gt;if rv is None:&lt;/pre&gt;
+&lt;pre class="line before"&gt;&lt;span class="ws"&gt;                &lt;/span&gt;rv = self.dispatch_request()&lt;/pre&gt;
+&lt;pre class="line before"&gt;&lt;span class="ws"&gt;        &lt;/span&gt;except Exception as e:&lt;/pre&gt;
+&lt;pre class="line current"&gt;&lt;span class="ws"&gt;            &lt;/span&gt;rv = self.handle_user_exception(e)&lt;/pre&gt;
+&lt;pre class="line after"&gt;&lt;span class="ws"&gt;        &lt;/span&gt;return self.finalize_request(rv)&lt;/pre&gt;
+&lt;pre class="line after"&gt;&lt;span class="ws"&gt;&lt;/span&gt; &lt;/pre&gt;
+&lt;pre class="line after"&gt;&lt;span class="ws"&gt;    &lt;/span&gt;def finalize_request(&lt;/pre&gt;
+&lt;pre class="line after"&gt;&lt;span class="ws"&gt;        &lt;/span&gt;self,&lt;/pre&gt;
+&lt;pre class="line after"&gt;&lt;span class="ws"&gt;        &lt;/span&gt;rv: t.Union[ft.ResponseReturnValue, HTTPException],&lt;/pre&gt;&lt;/div&gt;
+&lt;/div&gt;
+
+&lt;li&gt;&lt;div class="frame" id="frame-140602003835472"&gt;
+  &lt;h4&gt;File &lt;cite class="filename"&gt;"/home/song/.local/lib/python3.8/site-packages/flask/app.py"&lt;/cite&gt;,
+      line &lt;em class="line"&gt;1820&lt;/em&gt;,
+      in &lt;code class="function"&gt;full_dispatch_request&lt;/code&gt;&lt;/h4&gt;
+  &lt;div class="source "&gt;&lt;pre class="line before"&gt;&lt;span class="ws"&gt;&lt;/span&gt; &lt;/pre&gt;
+&lt;pre class="line before"&gt;&lt;span class="ws"&gt;        &lt;/span&gt;try:&lt;/pre&gt;
+&lt;pre class="line before"&gt;&lt;span class="ws"&gt;            &lt;/span&gt;request_started.send(self)&lt;/pre&gt;
+&lt;pre class="line before"&gt;&lt;span class="ws"&gt;            &lt;/span&gt;rv = self.preprocess_request()&lt;/pre&gt;
+&lt;pre class="line before"&gt;&lt;span class="ws"&gt;            &lt;/span&gt;if rv is None:&lt;/pre&gt;
+&lt;pre class="line current"&gt;&lt;span class="ws"&gt;                &lt;/span&gt;rv = self.dispatch_request()&lt;/pre&gt;
+&lt;pre class="line after"&gt;&lt;span class="ws"&gt;        &lt;/span&gt;except Exception as e:&lt;/pre&gt;
+&lt;pre class="line after"&gt;&lt;span class="ws"&gt;            &lt;/span&gt;rv = self.handle_user_exception(e)&lt;/pre&gt;
+&lt;pre class="line after"&gt;&lt;span class="ws"&gt;        &lt;/span&gt;return self.finalize_request(rv)&lt;/pre&gt;
+&lt;pre class="line after"&gt;&lt;span class="ws"&gt;&lt;/span&gt; &lt;/pre&gt;
+&lt;pre class="line after"&gt;&lt;span class="ws"&gt;    &lt;/span&gt;def finalize_request(&lt;/pre&gt;&lt;/div&gt;
+&lt;/div&gt;
+
+&lt;li&gt;&lt;div class="frame" id="frame-140602003835920"&gt;
+  &lt;h4&gt;File &lt;cite class="filename"&gt;"/home/song/.local/lib/python3.8/site-packages/flask/app.py"&lt;/cite&gt;,
+      line &lt;em class="line"&gt;1796&lt;/em&gt;,
+      in &lt;code class="function"&gt;dispatch_request&lt;/code&gt;&lt;/h4&gt;
+  &lt;div class="source "&gt;&lt;pre class="line before"&gt;&lt;span class="ws"&gt;            &lt;/span&gt;and req.method == &amp;#34;OPTIONS&amp;#34;&lt;/pre&gt;
+&lt;pre class="line before"&gt;&lt;span class="ws"&gt;        &lt;/span&gt;):&lt;/pre&gt;
+&lt;pre class="line before"&gt;&lt;span class="ws"&gt;            &lt;/span&gt;return self.make_default_options_response()&lt;/pre&gt;
+&lt;pre class="line before"&gt;&lt;span class="ws"&gt;        &lt;/span&gt;# otherwise dispatch to the handler for that endpoint&lt;/pre&gt;
+&lt;pre class="line before"&gt;&lt;span class="ws"&gt;        &lt;/span&gt;view_args: t.Dict[str, t.Any] = req.view_args  # type: ignore[assignment]&lt;/pre&gt;
+&lt;pre class="line current"&gt;&lt;span class="ws"&gt;        &lt;/span&gt;return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)&lt;/pre&gt;
+&lt;pre class="line after"&gt;&lt;span class="ws"&gt;&lt;/span&gt; &lt;/pre&gt;
+&lt;pre class="line after"&gt;&lt;span class="ws"&gt;    &lt;/span&gt;def full_dispatch_request(self) -&amp;gt; Response:&lt;/pre&gt;
+&lt;pre class="line after"&gt;&lt;span class="ws"&gt;        &lt;/span&gt;&amp;#34;&amp;#34;&amp;#34;Dispatches the request and on top of that performs request&lt;/pre&gt;
+&lt;pre class="line after"&gt;&lt;span class="ws"&gt;        &lt;/span&gt;pre and postprocessing as well as HTTP exception catching and&lt;/pre&gt;
+&lt;pre class="line after"&gt;&lt;span class="ws"&gt;        &lt;/span&gt;error handling.&lt;/pre&gt;&lt;/div&gt;
+&lt;/div&gt;
+
+&lt;li&gt;&lt;div class="frame" id="frame-140602003836816"&gt;
+  &lt;h4&gt;File &lt;cite class="filename"&gt;"/home/song/.local/lib/python3.8/site-packages/flask_httpauth.py"&lt;/cite&gt;,
+      line &lt;em class="line"&gt;172&lt;/em&gt;,
+      in &lt;code class="function"&gt;decorated&lt;/code&gt;&lt;/h4&gt;
+  &lt;div class="source "&gt;&lt;pre class="line before"&gt;&lt;span class="ws"&gt;                        &lt;/span&gt;except TypeError:&lt;/pre&gt;
+&lt;pre class="line before"&gt;&lt;span class="ws"&gt;                            &lt;/span&gt;return self.auth_error_callback()&lt;/pre&gt;
+&lt;pre class="line before"&gt;&lt;span class="ws"&gt;&lt;/span&gt; &lt;/pre&gt;
+&lt;pre class="line before"&gt;&lt;span class="ws"&gt;                    &lt;/span&gt;g.flask_httpauth_user = user if user is not True \&lt;/pre&gt;
+&lt;pre class="line before"&gt;&lt;span class="ws"&gt;                        &lt;/span&gt;else auth.username if auth else None&lt;/pre&gt;
+&lt;pre class="line current"&gt;&lt;span class="ws"&gt;                &lt;/span&gt;return self.ensure_sync(f)(*args, **kwargs)&lt;/pre&gt;
+&lt;pre class="line after"&gt;&lt;span class="ws"&gt;            &lt;/span&gt;return decorated&lt;/pre&gt;
+&lt;pre class="line after"&gt;&lt;span class="ws"&gt;&lt;/span&gt; &lt;/pre&gt;
+&lt;pre class="line after"&gt;&lt;span class="ws"&gt;        &lt;/span&gt;if f:&lt;/pre&gt;
+&lt;pre class="line after"&gt;&lt;span class="ws"&gt;            &lt;/span&gt;return login_required_internal(f)&lt;/pre&gt;
+&lt;pre class="line after"&gt;&lt;span class="ws"&gt;        &lt;/span&gt;return login_required_internal&lt;/pre&gt;&lt;/div&gt;
+&lt;/div&gt;
+
+&lt;li&gt;&lt;div class="frame" id="frame-140602003836144"&gt;
+  &lt;h4&gt;File &lt;cite class="filename"&gt;"/home/song/project/Assignment_Robot/app.py"&lt;/cite&gt;,
+      line &lt;em class="line"&gt;51&lt;/em&gt;,
+      in &lt;code class="function"&gt;create_payment&lt;/code&gt;&lt;/h4&gt;
+  &lt;div class="source "&gt;&lt;pre class="line before"&gt;&lt;span class="ws"&gt;                    &lt;/span&gt;&amp;#39;VALUES ({}, &amp;#34;{}&amp;#34;, {}, &amp;#34;... (set the log level to DEBUG or TRACE to see the full content) 
+ </msg>
+<msg timestamp="20220927 05:11:00.795" level="INFO">${response} = &lt;Response [500]&gt;</msg>
+<status status="PASS" starttime="20220927 05:11:00.631" endtime="20220927 05:11:00.795"/>
+</kw>
+<msg timestamp="20220927 05:11:00.795" level="INFO">${response} = &lt;Response [500]&gt;</msg>
+<status status="PASS" starttime="20220927 05:11:00.627" endtime="20220927 05:11:00.795"/>
+</kw>
+<kw name="Then Status Should Be" library="RequestsLibrary">
+<arg>500</arg>
+<arg>${response}</arg>
+<doc>Fails if response status code is different than the expected.</doc>
+<status status="PASS" starttime="20220927 05:11:00.795" endtime="20220927 05:11:00.796"/>
+</kw>
+<kw name="Web App test case teardown" library="CommonKeywords" type="TEARDOWN">
+<doc>Web App test case teardown</doc>
+<kw name="Reset" library="db_sqlite">
+<status status="PASS" starttime="20220927 05:11:00.796" endtime="20220927 05:11:01.389"/>
+</kw>
+<status status="PASS" starttime="20220927 05:11:00.796" endtime="20220927 05:11:01.390"/>
+</kw>
+<doc>Create payment with amount sting</doc>
+<tag>CreatePayment PUT</tag>
+<status status="PASS" starttime="20220927 05:11:00.623" endtime="20220927 05:11:01.390"/>
+</test>
+<test id="s1-s2-t9" name="TestID_Create_Payments_Single_With_Wrong_Path" line="84">
+<kw name="Create Dictionary" library="BuiltIn">
+<var>&amp;{body}</var>
+<arg>purchase=1001</arg>
+<arg>user=john</arg>
+<arg>amount=100</arg>
+<arg>currency=RMB</arg>
+<arg>completed=2</arg>
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<msg timestamp="20220927 05:11:01.395" level="INFO">&amp;{body} = { purchase=1001 | user=john | amount=100 | currency=RMB | completed=2 }</msg>
+<status status="PASS" starttime="20220927 05:11:01.393" endtime="20220927 05:11:01.395"/>
+</kw>
+<kw name="When I create payments with" library="CreatePaymentsKeywords">
+<var>${response}</var>
+<arg>admin</arg>
+<arg>admin</arg>
+<arg>${body}</arg>
+<arg>finance/api/v1.0/payme</arg>
+<doc>Create payment with user credentials</doc>
+<kw name="Create List" library="BuiltIn">
+<var>${auth}</var>
+<arg>${user}</arg>
+<arg>${passwd}</arg>
+<doc>Returns a list containing given items.</doc>
+<msg timestamp="20220927 05:11:01.399" level="INFO">${auth} = ['admin', 'admin']</msg>
+<status status="PASS" starttime="20220927 05:11:01.398" endtime="20220927 05:11:01.399"/>
+</kw>
+<kw name="Create Session" library="RequestsLibrary">
+<arg>paymentsession</arg>
+<arg>${URL}</arg>
+<arg>verify=true</arg>
+<arg>auth=${auth}</arg>
+<doc>Create Session: create a HTTP session to a server</doc>
+<msg timestamp="20220927 05:11:01.401" level="INFO">Creating Session using : alias=paymentsession, url=http://127.0.0.1:5000, headers={},                     cookies={}, auth=&lt;requests.auth.HTTPBasicAuth object at 0x7fce9691e190&gt;, timeout=None, proxies=None, verify=True,                     debug=0 </msg>
+<status status="PASS" starttime="20220927 05:11:01.400" endtime="20220927 05:11:01.402"/>
+</kw>
+<kw name="Put Request" library="RequestsLibrary">
+<var>${response}</var>
+<arg>paymentsession</arg>
+<arg>${route}</arg>
+<arg>json=${body}</arg>
+<doc>Send a PUT request on the session object found using the
+given `alias`</doc>
+<msg timestamp="20220927 05:11:01.411" level="INFO">PUT Request : url=http://127.0.0.1:5000/finance/api/v1.0/payme 
+ path_url=/finance/api/v1.0/payme 
+ headers={'User-Agent': 'python-requests/2.22.0', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive', 'Content-Length': '90', 'Content-Type': 'application/json', 'Authorization': 'Basic YWRtaW46YWRtaW4='} 
+ body=b'{"purchase": "1001", "user": "john", "amount": "100", "currency": "RMB", "completed": "2"}' 
+ </msg>
+<msg timestamp="20220927 05:11:01.411" level="INFO">PUT Response : url=http://127.0.0.1:5000/finance/api/v1.0/payme 
+ status=404, reason=NOT FOUND 
+ body={
+  "error": "Not found"
+}
+ 
+ </msg>
+<msg timestamp="20220927 05:11:01.412" level="INFO">${response} = &lt;Response [404]&gt;</msg>
+<status status="PASS" starttime="20220927 05:11:01.403" endtime="20220927 05:11:01.412"/>
+</kw>
+<msg timestamp="20220927 05:11:01.412" level="INFO">${response} = &lt;Response [404]&gt;</msg>
+<status status="PASS" starttime="20220927 05:11:01.396" endtime="20220927 05:11:01.412"/>
+</kw>
+<kw name="Then Status Should Be" library="RequestsLibrary">
+<arg>404</arg>
+<arg>${response}</arg>
+<doc>Fails if response status code is different than the expected.</doc>
+<status status="PASS" starttime="20220927 05:11:01.413" endtime="20220927 05:11:01.414"/>
+</kw>
+<kw name="Web App test case teardown" library="CommonKeywords" type="TEARDOWN">
+<doc>Web App test case teardown</doc>
+<kw name="Reset" library="db_sqlite">
+<status status="PASS" starttime="20220927 05:11:01.415" endtime="20220927 05:11:01.929"/>
+</kw>
+<status status="PASS" starttime="20220927 05:11:01.414" endtime="20220927 05:11:01.929"/>
+</kw>
+<doc>Create payment with amount sting</doc>
+<tag>CreatePayment PUT</tag>
+<status status="PASS" starttime="20220927 05:11:01.391" endtime="20220927 05:11:01.929"/>
+</test>
+<doc>Test suite to create payments</doc>
+<status status="FAIL" starttime="20220927 05:10:54.838" endtime="20220927 05:11:01.930"/>
+</suite>
+<suite id="s1-s3" name="GetPayments" source="/home/song/project/Assignment_Robot/Tests/GetPayments.robot">
+<test id="s1-s3-t1" name="TestID_Get_Payments_Single_Defalt_With_Admin" line="8">
+<kw name="When I get payments with" library="GetPaymentsKeywords">
+<var>${response}</var>
+<arg>admin</arg>
+<arg>admin</arg>
+<doc>Get payment with user credentials</doc>
+<kw name="Create List" library="BuiltIn">
+<var>${auth}</var>
+<arg>${user}</arg>
+<arg>${passwd}</arg>
+<doc>Returns a list containing given items.</doc>
+<msg timestamp="20220927 05:11:01.944" level="INFO">${auth} = ['admin', 'admin']</msg>
+<status status="PASS" starttime="20220927 05:11:01.944" endtime="20220927 05:11:01.944"/>
+</kw>
+<kw name="Create Session" library="RequestsLibrary">
+<arg>paymentsession</arg>
+<arg>${URL}</arg>
+<arg>verify=true</arg>
+<arg>auth=${auth}</arg>
+<doc>Create Session: create a HTTP session to a server</doc>
+<msg timestamp="20220927 05:11:01.945" level="INFO">Creating Session using : alias=paymentsession, url=http://127.0.0.1:5000, headers={},                     cookies={}, auth=&lt;requests.auth.HTTPBasicAuth object at 0x7fce9691efa0&gt;, timeout=None, proxies=None, verify=True,                     debug=0 </msg>
+<status status="PASS" starttime="20220927 05:11:01.944" endtime="20220927 05:11:01.945"/>
+</kw>
+<kw name="Get Request" library="RequestsLibrary">
+<var>${response}</var>
+<arg>paymentsession</arg>
+<arg>${route}</arg>
+<doc>Send a GET request on the session object found using the
+given `alias`</doc>
+<msg timestamp="20220927 05:11:02.081" level="INFO">GET Request : url=http://127.0.0.1:5000/finance/api/v1.0/payments 
+ path_url=/finance/api/v1.0/payments 
+ headers={'User-Agent': 'python-requests/2.22.0', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive', 'Authorization': 'Basic YWRtaW46YWRtaW4='} 
+ body=None 
+ </msg>
+<msg timestamp="20220927 05:11:02.081" level="INFO">GET Response : url=http://127.0.0.1:5000/finance/api/v1.0/payments 
+ status=200, reason=OK 
+ body={
+  "payments": [
+    [
+      1,
+      12345,
+      "john",
+      12.5,
+      "EUR",
+      1
+    ]
+  ]
+}
+ 
+ </msg>
+<msg timestamp="20220927 05:11:02.081" level="INFO">${response} = &lt;Response [200]&gt;</msg>
+<status status="PASS" starttime="20220927 05:11:01.945" endtime="20220927 05:11:02.081"/>
+</kw>
+<msg timestamp="20220927 05:11:02.082" level="INFO">${response} = &lt;Response [200]&gt;</msg>
+<status status="PASS" starttime="20220927 05:11:01.943" endtime="20220927 05:11:02.082"/>
+</kw>
+<kw name="Then Status Should Be" library="RequestsLibrary">
+<arg>200</arg>
+<arg>${response}</arg>
+<doc>Fails if response status code is different than the expected.</doc>
+<status status="PASS" starttime="20220927 05:11:02.082" endtime="20220927 05:11:02.082"/>
+</kw>
+<kw name="And Payment should contain purchase" library="GetPaymentsKeywords">
+<arg>${response}</arg>
+<arg>12345</arg>
+<doc>Payment should contain specific purchase ID</doc>
+<kw name="Get Length" library="BuiltIn">
+<var>${PaymentLength}</var>
+<arg>${payment.json()['payments'][-1]}</arg>
+<doc>Returns and logs the length of the given item as an integer.</doc>
+<msg timestamp="20220927 05:11:02.083" level="INFO">Length is 6</msg>
+<msg timestamp="20220927 05:11:02.083" level="INFO">${PaymentLength} = 6</msg>
+<status status="PASS" starttime="20220927 05:11:02.083" endtime="20220927 05:11:02.083"/>
+</kw>
+<kw name="Should Be Equal As Integers" library="BuiltIn">
+<arg>${PaymentLength}</arg>
+<arg>6</arg>
+<doc>Fails if objects are unequal after converting them to integers.</doc>
+<msg timestamp="20220927 05:11:02.083" level="INFO">Argument types are:
+&lt;class 'int'&gt;
+&lt;class 'str'&gt;</msg>
+<status status="PASS" starttime="20220927 05:11:02.083" endtime="20220927 05:11:02.084"/>
+</kw>
+<kw name="Get From List" library="Collections">
+<var>${titleFromList}</var>
+<arg>${payment.json()['payments'][-1]}</arg>
+<arg>1</arg>
+<doc>Returns the value specified with an ``index`` from ``list``.</doc>
+<msg timestamp="20220927 05:11:02.084" level="INFO">${titleFromList} = 12345</msg>
+<status status="PASS" starttime="20220927 05:11:02.084" endtime="20220927 05:11:02.084"/>
+</kw>
+<kw name="Should Be Equal As Integers" library="BuiltIn">
+<arg>${titleFromList}</arg>
+<arg>${purchase}</arg>
+<doc>Fails if objects are unequal after converting them to integers.</doc>
+<msg timestamp="20220927 05:11:02.084" level="INFO">Argument types are:
+&lt;class 'int'&gt;
+&lt;class 'str'&gt;</msg>
+<status status="PASS" starttime="20220927 05:11:02.084" endtime="20220927 05:11:02.085"/>
+</kw>
+<status status="PASS" starttime="20220927 05:11:02.082" endtime="20220927 05:11:02.085"/>
+</kw>
+<kw name="Web App test case teardown" library="CommonKeywords" type="TEARDOWN">
+<doc>Web App test case teardown</doc>
+<kw name="Reset" library="db_sqlite">
+<status status="PASS" starttime="20220927 05:11:02.085" endtime="20220927 05:11:02.625"/>
+</kw>
+<status status="PASS" starttime="20220927 05:11:02.085" endtime="20220927 05:11:02.625"/>
+</kw>
+<doc>Get Predifined Payment</doc>
+<tag>GetPayment Get</tag>
+<status status="PASS" starttime="20220927 05:11:01.942" endtime="20220927 05:11:02.625"/>
+</test>
+<test id="s1-s3-t2" name="TestID_Get_Payments_Wrong_Password" line="17">
+<kw name="When I get payments with" library="GetPaymentsKeywords">
+<var>${response}</var>
+<arg>admin</arg>
+<arg>john</arg>
+<doc>Get payment with user credentials</doc>
+<kw name="Create List" library="BuiltIn">
+<var>${auth}</var>
+<arg>${user}</arg>
+<arg>${passwd}</arg>
+<doc>Returns a list containing given items.</doc>
+<msg timestamp="20220927 05:11:02.628" level="INFO">${auth} = ['admin', 'john']</msg>
+<status status="PASS" starttime="20220927 05:11:02.627" endtime="20220927 05:11:02.628"/>
+</kw>
+<kw name="Create Session" library="RequestsLibrary">
+<arg>paymentsession</arg>
+<arg>${URL}</arg>
+<arg>verify=true</arg>
+<arg>auth=${auth}</arg>
+<doc>Create Session: create a HTTP session to a server</doc>
+<msg timestamp="20220927 05:11:02.629" level="INFO">Creating Session using : alias=paymentsession, url=http://127.0.0.1:5000, headers={},                     cookies={}, auth=&lt;requests.auth.HTTPBasicAuth object at 0x7fce9693c1f0&gt;, timeout=None, proxies=None, verify=True,                     debug=0 </msg>
+<status status="PASS" starttime="20220927 05:11:02.628" endtime="20220927 05:11:02.630"/>
+</kw>
+<kw name="Get Request" library="RequestsLibrary">
+<var>${response}</var>
+<arg>paymentsession</arg>
+<arg>${route}</arg>
+<doc>Send a GET request on the session object found using the
+given `alias`</doc>
+<msg timestamp="20220927 05:11:02.793" level="INFO">GET Request : url=http://127.0.0.1:5000/finance/api/v1.0/payments 
+ path_url=/finance/api/v1.0/payments 
+ headers={'User-Agent': 'python-requests/2.22.0', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive', 'Authorization': 'Basic YWRtaW46am9obg=='} 
+ body=None 
+ </msg>
+<msg timestamp="20220927 05:11:02.793" level="INFO">GET Response : url=http://127.0.0.1:5000/finance/api/v1.0/payments 
+ status=403, reason=FORBIDDEN 
+ body={
+  "error": "Unauthorized access"
+}
+ 
+ </msg>
+<msg timestamp="20220927 05:11:02.794" level="INFO">${response} = &lt;Response [403]&gt;</msg>
+<status status="PASS" starttime="20220927 05:11:02.630" endtime="20220927 05:11:02.794"/>
+</kw>
+<msg timestamp="20220927 05:11:02.794" level="INFO">${response} = &lt;Response [403]&gt;</msg>
+<status status="PASS" starttime="20220927 05:11:02.627" endtime="20220927 05:11:02.794"/>
+</kw>
+<kw name="Then Status Should Be" library="RequestsLibrary">
+<arg>403</arg>
+<arg>${response}</arg>
+<doc>Fails if response status code is different than the expected.</doc>
+<status status="PASS" starttime="20220927 05:11:02.794" endtime="20220927 05:11:02.794"/>
+</kw>
+<kw name="Web App test case teardown" library="CommonKeywords" type="TEARDOWN">
+<doc>Web App test case teardown</doc>
+<kw name="Reset" library="db_sqlite">
+<status status="PASS" starttime="20220927 05:11:02.795" endtime="20220927 05:11:03.297"/>
+</kw>
+<status status="PASS" starttime="20220927 05:11:02.794" endtime="20220927 05:11:03.298"/>
+</kw>
+<doc>Get Predifined Payment with wrong password</doc>
+<tag>GetPayment Get</tag>
+<status status="PASS" starttime="20220927 05:11:02.626" endtime="20220927 05:11:03.298"/>
+</test>
+<test id="s1-s3-t3" name="TestID_Get_Payments_With_Normal_User" line="25">
+<kw name="When I get payments with" library="GetPaymentsKeywords">
+<var>${response}</var>
+<arg>john</arg>
+<arg>john</arg>
+<doc>Get payment with user credentials</doc>
+<kw name="Create List" library="BuiltIn">
+<var>${auth}</var>
+<arg>${user}</arg>
+<arg>${passwd}</arg>
+<doc>Returns a list containing given items.</doc>
+<msg timestamp="20220927 05:11:03.304" level="INFO">${auth} = ['john', 'john']</msg>
+<status status="PASS" starttime="20220927 05:11:03.301" endtime="20220927 05:11:03.304"/>
+</kw>
+<kw name="Create Session" library="RequestsLibrary">
+<arg>paymentsession</arg>
+<arg>${URL}</arg>
+<arg>verify=true</arg>
+<arg>auth=${auth}</arg>
+<doc>Create Session: create a HTTP session to a server</doc>
+<msg timestamp="20220927 05:11:03.305" level="INFO">Creating Session using : alias=paymentsession, url=http://127.0.0.1:5000, headers={},                     cookies={}, auth=&lt;requests.auth.HTTPBasicAuth object at 0x7fce9693c0a0&gt;, timeout=None, proxies=None, verify=True,                     debug=0 </msg>
+<status status="PASS" starttime="20220927 05:11:03.304" endtime="20220927 05:11:03.306"/>
+</kw>
+<kw name="Get Request" library="RequestsLibrary">
+<var>${response}</var>
+<arg>paymentsession</arg>
+<arg>${route}</arg>
+<doc>Send a GET request on the session object found using the
+given `alias`</doc>
+<msg timestamp="20220927 05:11:03.476" level="INFO">GET Request : url=http://127.0.0.1:5000/finance/api/v1.0/payments 
+ path_url=/finance/api/v1.0/payments 
+ headers={'User-Agent': 'python-requests/2.22.0', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive', 'Authorization': 'Basic am9objpqb2hu'} 
+ body=None 
+ </msg>
+<msg timestamp="20220927 05:11:03.477" level="INFO">GET Response : url=http://127.0.0.1:5000/finance/api/v1.0/payments 
+ status=200, reason=OK 
+ body={
+  "payments": [
+    [
+      1,
+      12345,
+      "john",
+      12.5,
+      "EUR",
+      1
+    ]
+  ]
+}
+ 
+ </msg>
+<msg timestamp="20220927 05:11:03.477" level="INFO">${response} = &lt;Response [200]&gt;</msg>
+<status status="PASS" starttime="20220927 05:11:03.306" endtime="20220927 05:11:03.477"/>
+</kw>
+<msg timestamp="20220927 05:11:03.477" level="INFO">${response} = &lt;Response [200]&gt;</msg>
+<status status="PASS" starttime="20220927 05:11:03.300" endtime="20220927 05:11:03.477"/>
+</kw>
+<kw name="Then Status Should Be" library="RequestsLibrary">
+<arg>200</arg>
+<arg>${response}</arg>
+<doc>Fails if response status code is different than the expected.</doc>
+<status status="PASS" starttime="20220927 05:11:03.477" endtime="20220927 05:11:03.477"/>
+</kw>
+<kw name="And Payment should contain purchase" library="GetPaymentsKeywords">
+<arg>${response}</arg>
+<arg>12345</arg>
+<doc>Payment should contain specific purchase ID</doc>
+<kw name="Get Length" library="BuiltIn">
+<var>${PaymentLength}</var>
+<arg>${payment.json()['payments'][-1]}</arg>
+<doc>Returns and logs the length of the given item as an integer.</doc>
+<msg timestamp="20220927 05:11:03.478" level="INFO">Length is 6</msg>
+<msg timestamp="20220927 05:11:03.478" level="INFO">${PaymentLength} = 6</msg>
+<status status="PASS" starttime="20220927 05:11:03.478" endtime="20220927 05:11:03.478"/>
+</kw>
+<kw name="Should Be Equal As Integers" library="BuiltIn">
+<arg>${PaymentLength}</arg>
+<arg>6</arg>
+<doc>Fails if objects are unequal after converting them to integers.</doc>
+<msg timestamp="20220927 05:11:03.479" level="INFO">Argument types are:
+&lt;class 'int'&gt;
+&lt;class 'str'&gt;</msg>
+<status status="PASS" starttime="20220927 05:11:03.479" endtime="20220927 05:11:03.479"/>
+</kw>
+<kw name="Get From List" library="Collections">
+<var>${titleFromList}</var>
+<arg>${payment.json()['payments'][-1]}</arg>
+<arg>1</arg>
+<doc>Returns the value specified with an ``index`` from ``list``.</doc>
+<msg timestamp="20220927 05:11:03.479" level="INFO">${titleFromList} = 12345</msg>
+<status status="PASS" starttime="20220927 05:11:03.479" endtime="20220927 05:11:03.479"/>
+</kw>
+<kw name="Should Be Equal As Integers" library="BuiltIn">
+<arg>${titleFromList}</arg>
+<arg>${purchase}</arg>
+<doc>Fails if objects are unequal after converting them to integers.</doc>
+<msg timestamp="20220927 05:11:03.480" level="INFO">Argument types are:
+&lt;class 'int'&gt;
+&lt;class 'str'&gt;</msg>
+<status status="PASS" starttime="20220927 05:11:03.479" endtime="20220927 05:11:03.480"/>
+</kw>
+<status status="PASS" starttime="20220927 05:11:03.478" endtime="20220927 05:11:03.480"/>
+</kw>
+<kw name="Web App test case teardown" library="CommonKeywords" type="TEARDOWN">
+<doc>Web App test case teardown</doc>
+<kw name="Reset" library="db_sqlite">
+<status status="PASS" starttime="20220927 05:11:03.480" endtime="20220927 05:11:04.036"/>
+</kw>
+<status status="PASS" starttime="20220927 05:11:03.480" endtime="20220927 05:11:04.037"/>
+</kw>
+<doc>Get Payment with normal user</doc>
+<tag>GetPayment Get</tag>
+<status status="PASS" starttime="20220927 05:11:03.299" endtime="20220927 05:11:04.037"/>
+</test>
+<test id="s1-s3-t4" name="TestID_Get_Payments_With_Non_User" line="34">
+<kw name="When I get payments with" library="GetPaymentsKeywords">
+<var>${response}</var>
+<arg>song</arg>
+<arg>song</arg>
+<doc>Get payment with user credentials</doc>
+<kw name="Create List" library="BuiltIn">
+<var>${auth}</var>
+<arg>${user}</arg>
+<arg>${passwd}</arg>
+<doc>Returns a list containing given items.</doc>
+<msg timestamp="20220927 05:11:04.041" level="INFO">${auth} = ['song', 'song']</msg>
+<status status="PASS" starttime="20220927 05:11:04.040" endtime="20220927 05:11:04.041"/>
+</kw>
+<kw name="Create Session" library="RequestsLibrary">
+<arg>paymentsession</arg>
+<arg>${URL}</arg>
+<arg>verify=true</arg>
+<arg>auth=${auth}</arg>
+<doc>Create Session: create a HTTP session to a server</doc>
+<msg timestamp="20220927 05:11:04.042" level="INFO">Creating Session using : alias=paymentsession, url=http://127.0.0.1:5000, headers={},                     cookies={}, auth=&lt;requests.auth.HTTPBasicAuth object at 0x7fce969155b0&gt;, timeout=None, proxies=None, verify=True,                     debug=0 </msg>
+<status status="PASS" starttime="20220927 05:11:04.041" endtime="20220927 05:11:04.042"/>
+</kw>
+<kw name="Get Request" library="RequestsLibrary">
+<var>${response}</var>
+<arg>paymentsession</arg>
+<arg>${route}</arg>
+<doc>Send a GET request on the session object found using the
+given `alias`</doc>
+<msg timestamp="20220927 05:11:04.048" level="INFO">GET Request : url=http://127.0.0.1:5000/finance/api/v1.0/payments 
+ path_url=/finance/api/v1.0/payments 
+ headers={'User-Agent': 'python-requests/2.22.0', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive', 'Authorization': 'Basic c29uZzpzb25n'} 
+ body=None 
+ </msg>
+<msg timestamp="20220927 05:11:04.048" level="INFO">GET Response : url=http://127.0.0.1:5000/finance/api/v1.0/payments 
+ status=403, reason=FORBIDDEN 
+ body={
+  "error": "Unauthorized access"
+}
+ 
+ </msg>
+<msg timestamp="20220927 05:11:04.048" level="INFO">${response} = &lt;Response [403]&gt;</msg>
+<status status="PASS" starttime="20220927 05:11:04.042" endtime="20220927 05:11:04.048"/>
+</kw>
+<msg timestamp="20220927 05:11:04.049" level="INFO">${response} = &lt;Response [403]&gt;</msg>
+<status status="PASS" starttime="20220927 05:11:04.039" endtime="20220927 05:11:04.049"/>
+</kw>
+<kw name="Then Status Should Be" library="RequestsLibrary">
+<arg>403</arg>
+<arg>${response}</arg>
+<doc>Fails if response status code is different than the expected.</doc>
+<status status="PASS" starttime="20220927 05:11:04.049" endtime="20220927 05:11:04.050"/>
+</kw>
+<kw name="Web App test case teardown" library="CommonKeywords" type="TEARDOWN">
+<doc>Web App test case teardown</doc>
+<kw name="Reset" library="db_sqlite">
+<status status="PASS" starttime="20220927 05:11:04.051" endtime="20220927 05:11:04.641"/>
+</kw>
+<status status="PASS" starttime="20220927 05:11:04.050" endtime="20220927 05:11:04.641"/>
+</kw>
+<doc>Get payment with non exsitent user</doc>
+<tag>GetPayment Get</tag>
+<status status="PASS" starttime="20220927 05:11:04.038" endtime="20220927 05:11:04.641"/>
+</test>
+<test id="s1-s3-t5" name="TestID_Get_Payments_With_Wrong_Route" line="42">
+<kw name="When I get payments with" library="GetPaymentsKeywords">
+<var>${response}</var>
+<arg>song</arg>
+<arg>song</arg>
+<arg>finance/api/v1.0/pay</arg>
+<doc>Get payment with user credentials</doc>
+<kw name="Create List" library="BuiltIn">
+<var>${auth}</var>
+<arg>${user}</arg>
+<arg>${passwd}</arg>
+<doc>Returns a list containing given items.</doc>
+<msg timestamp="20220927 05:11:04.643" level="INFO">${auth} = ['song', 'song']</msg>
+<status status="PASS" starttime="20220927 05:11:04.643" endtime="20220927 05:11:04.644"/>
+</kw>
+<kw name="Create Session" library="RequestsLibrary">
+<arg>paymentsession</arg>
+<arg>${URL}</arg>
+<arg>verify=true</arg>
+<arg>auth=${auth}</arg>
+<doc>Create Session: create a HTTP session to a server</doc>
+<msg timestamp="20220927 05:11:04.644" level="INFO">Creating Session using : alias=paymentsession, url=http://127.0.0.1:5000, headers={},                     cookies={}, auth=&lt;requests.auth.HTTPBasicAuth object at 0x7fce96970e20&gt;, timeout=None, proxies=None, verify=True,                     debug=0 </msg>
+<status status="PASS" starttime="20220927 05:11:04.644" endtime="20220927 05:11:04.645"/>
+</kw>
+<kw name="Get Request" library="RequestsLibrary">
+<var>${response}</var>
+<arg>paymentsession</arg>
+<arg>${route}</arg>
+<doc>Send a GET request on the session object found using the
+given `alias`</doc>
+<msg timestamp="20220927 05:11:04.649" level="INFO">GET Request : url=http://127.0.0.1:5000/finance/api/v1.0/pay 
+ path_url=/finance/api/v1.0/pay 
+ headers={'User-Agent': 'python-requests/2.22.0', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive', 'Authorization': 'Basic c29uZzpzb25n'} 
+ body=None 
+ </msg>
+<msg timestamp="20220927 05:11:04.649" level="INFO">GET Response : url=http://127.0.0.1:5000/finance/api/v1.0/pay 
+ status=404, reason=NOT FOUND 
+ body={
+  "error": "Not found"
+}
+ 
+ </msg>
+<msg timestamp="20220927 05:11:04.649" level="INFO">${response} = &lt;Response [404]&gt;</msg>
+<status status="PASS" starttime="20220927 05:11:04.645" endtime="20220927 05:11:04.650"/>
+</kw>
+<msg timestamp="20220927 05:11:04.650" level="INFO">${response} = &lt;Response [404]&gt;</msg>
+<status status="PASS" starttime="20220927 05:11:04.643" endtime="20220927 05:11:04.650"/>
+</kw>
+<kw name="Then Status Should Be" library="RequestsLibrary">
+<arg>404</arg>
+<arg>${response}</arg>
+<doc>Fails if response status code is different than the expected.</doc>
+<status status="PASS" starttime="20220927 05:11:04.650" endtime="20220927 05:11:04.651"/>
+</kw>
+<kw name="Web App test case teardown" library="CommonKeywords" type="TEARDOWN">
+<doc>Web App test case teardown</doc>
+<kw name="Reset" library="db_sqlite">
+<status status="PASS" starttime="20220927 05:11:04.651" endtime="20220927 05:11:05.224"/>
+</kw>
+<status status="PASS" starttime="20220927 05:11:04.651" endtime="20220927 05:11:05.224"/>
+</kw>
+<doc>Get payment with a wrong route</doc>
+<tag>GetPayment Get</tag>
+<status status="PASS" starttime="20220927 05:11:04.642" endtime="20220927 05:11:05.225"/>
+</test>
+<doc>Test suite to get payments</doc>
+<status status="PASS" starttime="20220927 05:11:01.933" endtime="20220927 05:11:05.226"/>
+</suite>
+<suite id="s1-s4" name="RemovePayments" source="/home/song/project/Assignment_Robot/Tests/RemovePayments.robot">
+<test id="s1-s4-t1" name="TestID_Remove_Payments_With_Admin" line="8">
+<kw name="Create Dictionary" library="BuiltIn">
+<var>&amp;{body}</var>
+<arg>purchase=1001</arg>
+<arg>user=john</arg>
+<arg>amount=9000</arg>
+<arg>currency=GBP</arg>
+<arg>completed=2</arg>
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<msg timestamp="20220927 05:11:05.235" level="INFO">&amp;{body} = { purchase=1001 | user=john | amount=9000 | currency=GBP | completed=2 }</msg>
+<status status="PASS" starttime="20220927 05:11:05.235" endtime="20220927 05:11:05.235"/>
+</kw>
+<kw name="When I create payments with" library="CreatePaymentsKeywords">
+<arg>admin</arg>
+<arg>admin</arg>
+<arg>${body}</arg>
+<doc>Create payment with user credentials</doc>
+<kw name="Create List" library="BuiltIn">
+<var>${auth}</var>
+<arg>${user}</arg>
+<arg>${passwd}</arg>
+<doc>Returns a list containing given items.</doc>
+<msg timestamp="20220927 05:11:05.237" level="INFO">${auth} = ['admin', 'admin']</msg>
+<status status="PASS" starttime="20220927 05:11:05.237" endtime="20220927 05:11:05.237"/>
+</kw>
+<kw name="Create Session" library="RequestsLibrary">
+<arg>paymentsession</arg>
+<arg>${URL}</arg>
+<arg>verify=true</arg>
+<arg>auth=${auth}</arg>
+<doc>Create Session: create a HTTP session to a server</doc>
+<msg timestamp="20220927 05:11:05.238" level="INFO">Creating Session using : alias=paymentsession, url=http://127.0.0.1:5000, headers={},                     cookies={}, auth=&lt;requests.auth.HTTPBasicAuth object at 0x7fce969c2250&gt;, timeout=None, proxies=None, verify=True,                     debug=0 </msg>
+<status status="PASS" starttime="20220927 05:11:05.237" endtime="20220927 05:11:05.239"/>
+</kw>
+<kw name="Put Request" library="RequestsLibrary">
+<var>${response}</var>
+<arg>paymentsession</arg>
+<arg>${route}</arg>
+<arg>json=${body}</arg>
+<doc>Send a PUT request on the session object found using the
+given `alias`</doc>
+<msg timestamp="20220927 05:11:05.779" level="INFO">PUT Request : url=http://127.0.0.1:5000/finance/api/v1.0/payments 
+ path_url=/finance/api/v1.0/payments 
+ headers={'User-Agent': 'python-requests/2.22.0', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive', 'Content-Length': '91', 'Content-Type': 'application/json', 'Authorization': 'Basic YWRtaW46YWRtaW4='} 
+ body=b'{"purchase": "1001", "user": "john", "amount": "9000", "currency": "GBP", "completed": "2"}' 
+ </msg>
+<msg timestamp="20220927 05:11:05.779" level="INFO">PUT Response : url=http://127.0.0.1:5000/finance/api/v1.0/payments 
+ status=200, reason=OK 
+ body={
+  "created": 1
+}
+ 
+ </msg>
+<msg timestamp="20220927 05:11:05.779" level="INFO">${response} = &lt;Response [200]&gt;</msg>
+<status status="PASS" starttime="20220927 05:11:05.239" endtime="20220927 05:11:05.779"/>
+</kw>
+<status status="PASS" starttime="20220927 05:11:05.236" endtime="20220927 05:11:05.780"/>
+</kw>
+<kw name="Then I remove payments with" library="RemovePaymentsKeywords">
+<var>${response}</var>
+<arg>admin</arg>
+<arg>admin</arg>
+<arg>1</arg>
+<doc>remove payment with user credentials</doc>
+<kw name="Create List" library="BuiltIn">
+<var>${auth}</var>
+<arg>${user}</arg>
+<arg>${passwd}</arg>
+<doc>Returns a list containing given items.</doc>
+<msg timestamp="20220927 05:11:05.783" level="INFO">${auth} = ['admin', 'admin']</msg>
+<status status="PASS" starttime="20220927 05:11:05.782" endtime="20220927 05:11:05.783"/>
+</kw>
+<kw name="Create Session" library="RequestsLibrary">
+<arg>paymentsession</arg>
+<arg>${URL}</arg>
+<arg>verify=true</arg>
+<arg>auth=${auth}</arg>
+<doc>Create Session: create a HTTP session to a server</doc>
+<msg timestamp="20220927 05:11:05.784" level="INFO">Creating Session using : alias=paymentsession, url=http://127.0.0.1:5000, headers={},                     cookies={}, auth=&lt;requests.auth.HTTPBasicAuth object at 0x7fce9692a970&gt;, timeout=None, proxies=None, verify=True,                     debug=0 </msg>
+<status status="PASS" starttime="20220927 05:11:05.783" endtime="20220927 05:11:05.785"/>
+</kw>
+<kw name="Delete Request" library="RequestsLibrary">
+<var>${response}</var>
+<arg>paymentsession</arg>
+<arg>${route}${id}</arg>
+<doc>Send a DELETE request on the session object found using the
+given `alias`</doc>
+<msg timestamp="20220927 05:11:06.067" level="INFO">DELETE Request : url=http://127.0.0.1:5000/finance/api/v1.0/payments/1 
+ path_url=/finance/api/v1.0/payments/1 
+ headers={'User-Agent': 'python-requests/2.22.0', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive', 'Content-Length': '0', 'Authorization': 'Basic YWRtaW46YWRtaW4='} 
+ body=None 
+ </msg>
+<msg timestamp="20220927 05:11:06.067" level="INFO">DELETE Response : url=http://127.0.0.1:5000/finance/api/v1.0/payments/1 
+ status=200, reason=OK 
+ body={
+  "deleted": 1
+}
+ 
+ </msg>
+<msg timestamp="20220927 05:11:06.068" level="INFO">${response} = &lt;Response [200]&gt;</msg>
+<status status="PASS" starttime="20220927 05:11:05.785" endtime="20220927 05:11:06.068"/>
+</kw>
+<msg timestamp="20220927 05:11:06.069" level="INFO">${response} = &lt;Response [200]&gt;</msg>
+<status status="PASS" starttime="20220927 05:11:05.781" endtime="20220927 05:11:06.069"/>
+</kw>
+<kw name="Then Status Should Be" library="RequestsLibrary">
+<arg>200</arg>
+<arg>${response}</arg>
+<doc>Fails if response status code is different than the expected.</doc>
+<status status="PASS" starttime="20220927 05:11:06.069" endtime="20220927 05:11:06.070"/>
+</kw>
+<kw name="And Should Be Equal As Integers" library="BuiltIn">
+<arg>${response.json()['deleted']}</arg>
+<arg>1</arg>
+<doc>Fails if objects are unequal after converting them to integers.</doc>
+<msg timestamp="20220927 05:11:06.073" level="INFO">Argument types are:
+&lt;class 'int'&gt;
+&lt;class 'str'&gt;</msg>
+<status status="PASS" starttime="20220927 05:11:06.071" endtime="20220927 05:11:06.073"/>
+</kw>
+<kw name="Web App test case teardown" library="CommonKeywords" type="TEARDOWN">
+<doc>Web App test case teardown</doc>
+<kw name="Reset" library="db_sqlite">
+<status status="PASS" starttime="20220927 05:11:06.076" endtime="20220927 05:11:06.621"/>
+</kw>
+<status status="PASS" starttime="20220927 05:11:06.074" endtime="20220927 05:11:06.622"/>
+</kw>
+<doc>Remove payment with admin user</doc>
+<tag>RemovePayment Post</tag>
+<status status="PASS" starttime="20220927 05:11:05.234" endtime="20220927 05:11:06.622"/>
+</test>
+<test id="s1-s4-t2" name="TestID_Remove_Payments_With_Admin_Wrong_Password" line="19">
+<kw name="Create Dictionary" library="BuiltIn">
+<var>&amp;{body}</var>
+<arg>purchase=1001</arg>
+<arg>user=john</arg>
+<arg>amount=9000</arg>
+<arg>currency=GBP</arg>
+<arg>completed=2</arg>
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<msg timestamp="20220927 05:11:06.625" level="INFO">&amp;{body} = { purchase=1001 | user=john | amount=9000 | currency=GBP | completed=2 }</msg>
+<status status="PASS" starttime="20220927 05:11:06.624" endtime="20220927 05:11:06.625"/>
+</kw>
+<kw name="When I create payments with" library="CreatePaymentsKeywords">
+<arg>admin</arg>
+<arg>admin</arg>
+<arg>${body}</arg>
+<doc>Create payment with user credentials</doc>
+<kw name="Create List" library="BuiltIn">
+<var>${auth}</var>
+<arg>${user}</arg>
+<arg>${passwd}</arg>
+<doc>Returns a list containing given items.</doc>
+<msg timestamp="20220927 05:11:06.628" level="INFO">${auth} = ['admin', 'admin']</msg>
+<status status="PASS" starttime="20220927 05:11:06.627" endtime="20220927 05:11:06.628"/>
+</kw>
+<kw name="Create Session" library="RequestsLibrary">
+<arg>paymentsession</arg>
+<arg>${URL}</arg>
+<arg>verify=true</arg>
+<arg>auth=${auth}</arg>
+<doc>Create Session: create a HTTP session to a server</doc>
+<msg timestamp="20220927 05:11:06.629" level="INFO">Creating Session using : alias=paymentsession, url=http://127.0.0.1:5000, headers={},                     cookies={}, auth=&lt;requests.auth.HTTPBasicAuth object at 0x7fce96bc0670&gt;, timeout=None, proxies=None, verify=True,                     debug=0 </msg>
+<status status="PASS" starttime="20220927 05:11:06.628" endtime="20220927 05:11:06.630"/>
+</kw>
+<kw name="Put Request" library="RequestsLibrary">
+<var>${response}</var>
+<arg>paymentsession</arg>
+<arg>${route}</arg>
+<arg>json=${body}</arg>
+<doc>Send a PUT request on the session object found using the
+given `alias`</doc>
+<msg timestamp="20220927 05:11:06.894" level="INFO">PUT Request : url=http://127.0.0.1:5000/finance/api/v1.0/payments 
+ path_url=/finance/api/v1.0/payments 
+ headers={'User-Agent': 'python-requests/2.22.0', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive', 'Content-Length': '91', 'Content-Type': 'application/json', 'Authorization': 'Basic YWRtaW46YWRtaW4='} 
+ body=b'{"purchase": "1001", "user": "john", "amount": "9000", "currency": "GBP", "completed": "2"}' 
+ </msg>
+<msg timestamp="20220927 05:11:06.895" level="INFO">PUT Response : url=http://127.0.0.1:5000/finance/api/v1.0/payments 
+ status=200, reason=OK 
+ body={
+  "created": 1
+}
+ 
+ </msg>
+<msg timestamp="20220927 05:11:06.895" level="INFO">${response} = &lt;Response [200]&gt;</msg>
+<status status="PASS" starttime="20220927 05:11:06.630" endtime="20220927 05:11:06.895"/>
+</kw>
+<status status="PASS" starttime="20220927 05:11:06.626" endtime="20220927 05:11:06.895"/>
+</kw>
+<kw name="Then I remove payments with" library="RemovePaymentsKeywords">
+<var>${response}</var>
+<arg>admin</arg>
+<arg>song</arg>
+<arg>1</arg>
+<doc>remove payment with user credentials</doc>
+<kw name="Create List" library="BuiltIn">
+<var>${auth}</var>
+<arg>${user}</arg>
+<arg>${passwd}</arg>
+<doc>Returns a list containing given items.</doc>
+<msg timestamp="20220927 05:11:06.897" level="INFO">${auth} = ['admin', 'song']</msg>
+<status status="PASS" starttime="20220927 05:11:06.897" endtime="20220927 05:11:06.898"/>
+</kw>
+<kw name="Create Session" library="RequestsLibrary">
+<arg>paymentsession</arg>
+<arg>${URL}</arg>
+<arg>verify=true</arg>
+<arg>auth=${auth}</arg>
+<doc>Create Session: create a HTTP session to a server</doc>
+<msg timestamp="20220927 05:11:06.899" level="INFO">Creating Session using : alias=paymentsession, url=http://127.0.0.1:5000, headers={},                     cookies={}, auth=&lt;requests.auth.HTTPBasicAuth object at 0x7fce9699a130&gt;, timeout=None, proxies=None, verify=True,                     debug=0 </msg>
+<status status="PASS" starttime="20220927 05:11:06.898" endtime="20220927 05:11:06.899"/>
+</kw>
+<kw name="Delete Request" library="RequestsLibrary">
+<var>${response}</var>
+<arg>paymentsession</arg>
+<arg>${route}${id}</arg>
+<doc>Send a DELETE request on the session object found using the
+given `alias`</doc>
+<msg timestamp="20220927 05:11:07.062" level="INFO">DELETE Request : url=http://127.0.0.1:5000/finance/api/v1.0/payments/1 
+ path_url=/finance/api/v1.0/payments/1 
+ headers={'User-Agent': 'python-requests/2.22.0', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive', 'Content-Length': '0', 'Authorization': 'Basic YWRtaW46c29uZw=='} 
+ body=None 
+ </msg>
+<msg timestamp="20220927 05:11:07.063" level="INFO">DELETE Response : url=http://127.0.0.1:5000/finance/api/v1.0/payments/1 
+ status=403, reason=FORBIDDEN 
+ body={
+  "error": "Unauthorized access"
+}
+ 
+ </msg>
+<msg timestamp="20220927 05:11:07.063" level="INFO">${response} = &lt;Response [403]&gt;</msg>
+<status status="PASS" starttime="20220927 05:11:06.900" endtime="20220927 05:11:07.063"/>
+</kw>
+<msg timestamp="20220927 05:11:07.063" level="INFO">${response} = &lt;Response [403]&gt;</msg>
+<status status="PASS" starttime="20220927 05:11:06.896" endtime="20220927 05:11:07.063"/>
+</kw>
+<kw name="Then Status Should Be" library="RequestsLibrary">
+<arg>403</arg>
+<arg>${response}</arg>
+<doc>Fails if response status code is different than the expected.</doc>
+<status status="PASS" starttime="20220927 05:11:07.063" endtime="20220927 05:11:07.063"/>
+</kw>
+<kw name="Web App test case teardown" library="CommonKeywords" type="TEARDOWN">
+<doc>Web App test case teardown</doc>
+<kw name="Reset" library="db_sqlite">
+<status status="PASS" starttime="20220927 05:11:07.064" endtime="20220927 05:11:07.600"/>
+</kw>
+<status status="PASS" starttime="20220927 05:11:07.063" endtime="20220927 05:11:07.601"/>
+</kw>
+<doc>Remove payment with admin user</doc>
+<tag>RemovePayment Post</tag>
+<status status="PASS" starttime="20220927 05:11:06.623" endtime="20220927 05:11:07.601"/>
+</test>
+<test id="s1-s4-t3" name="TestID_Remove_Payments_With_Normal_User" line="29">
+<kw name="Create Dictionary" library="BuiltIn">
+<var>&amp;{body}</var>
+<arg>purchase=1001</arg>
+<arg>user=john</arg>
+<arg>amount=9000</arg>
+<arg>currency=GBP</arg>
+<arg>completed=2</arg>
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<msg timestamp="20220927 05:11:07.603" level="INFO">&amp;{body} = { purchase=1001 | user=john | amount=9000 | currency=GBP | completed=2 }</msg>
+<status status="PASS" starttime="20220927 05:11:07.602" endtime="20220927 05:11:07.603"/>
+</kw>
+<kw name="When I create payments with" library="CreatePaymentsKeywords">
+<arg>admin</arg>
+<arg>admin</arg>
+<arg>${body}</arg>
+<doc>Create payment with user credentials</doc>
+<kw name="Create List" library="BuiltIn">
+<var>${auth}</var>
+<arg>${user}</arg>
+<arg>${passwd}</arg>
+<doc>Returns a list containing given items.</doc>
+<msg timestamp="20220927 05:11:07.605" level="INFO">${auth} = ['admin', 'admin']</msg>
+<status status="PASS" starttime="20220927 05:11:07.604" endtime="20220927 05:11:07.605"/>
+</kw>
+<kw name="Create Session" library="RequestsLibrary">
+<arg>paymentsession</arg>
+<arg>${URL}</arg>
+<arg>verify=true</arg>
+<arg>auth=${auth}</arg>
+<doc>Create Session: create a HTTP session to a server</doc>
+<msg timestamp="20220927 05:11:07.606" level="INFO">Creating Session using : alias=paymentsession, url=http://127.0.0.1:5000, headers={},                     cookies={}, auth=&lt;requests.auth.HTTPBasicAuth object at 0x7fce96a10580&gt;, timeout=None, proxies=None, verify=True,                     debug=0 </msg>
+<status status="PASS" starttime="20220927 05:11:07.605" endtime="20220927 05:11:07.606"/>
+</kw>
+<kw name="Put Request" library="RequestsLibrary">
+<var>${response}</var>
+<arg>paymentsession</arg>
+<arg>${route}</arg>
+<arg>json=${body}</arg>
+<doc>Send a PUT request on the session object found using the
+given `alias`</doc>
+<msg timestamp="20220927 05:11:07.878" level="INFO">PUT Request : url=http://127.0.0.1:5000/finance/api/v1.0/payments 
+ path_url=/finance/api/v1.0/payments 
+ headers={'User-Agent': 'python-requests/2.22.0', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive', 'Content-Length': '91', 'Content-Type': 'application/json', 'Authorization': 'Basic YWRtaW46YWRtaW4='} 
+ body=b'{"purchase": "1001", "user": "john", "amount": "9000", "currency": "GBP", "completed": "2"}' 
+ </msg>
+<msg timestamp="20220927 05:11:07.878" level="INFO">PUT Response : url=http://127.0.0.1:5000/finance/api/v1.0/payments 
+ status=200, reason=OK 
+ body={
+  "created": 1
+}
+ 
+ </msg>
+<msg timestamp="20220927 05:11:07.879" level="INFO">${response} = &lt;Response [200]&gt;</msg>
+<status status="PASS" starttime="20220927 05:11:07.607" endtime="20220927 05:11:07.879"/>
+</kw>
+<status status="PASS" starttime="20220927 05:11:07.604" endtime="20220927 05:11:07.879"/>
+</kw>
+<kw name="Then I remove payments with" library="RemovePaymentsKeywords">
+<var>${response}</var>
+<arg>john</arg>
+<arg>john</arg>
+<arg>1</arg>
+<doc>remove payment with user credentials</doc>
+<kw name="Create List" library="BuiltIn">
+<var>${auth}</var>
+<arg>${user}</arg>
+<arg>${passwd}</arg>
+<doc>Returns a list containing given items.</doc>
+<msg timestamp="20220927 05:11:07.882" level="INFO">${auth} = ['john', 'john']</msg>
+<status status="PASS" starttime="20220927 05:11:07.881" endtime="20220927 05:11:07.882"/>
+</kw>
+<kw name="Create Session" library="RequestsLibrary">
+<arg>paymentsession</arg>
+<arg>${URL}</arg>
+<arg>verify=true</arg>
+<arg>auth=${auth}</arg>
+<doc>Create Session: create a HTTP session to a server</doc>
+<msg timestamp="20220927 05:11:07.883" level="INFO">Creating Session using : alias=paymentsession, url=http://127.0.0.1:5000, headers={},                     cookies={}, auth=&lt;requests.auth.HTTPBasicAuth object at 0x7fce969dfe50&gt;, timeout=None, proxies=None, verify=True,                     debug=0 </msg>
+<status status="PASS" starttime="20220927 05:11:07.882" endtime="20220927 05:11:07.884"/>
+</kw>
+<kw name="Delete Request" library="RequestsLibrary">
+<var>${response}</var>
+<arg>paymentsession</arg>
+<arg>${route}${id}</arg>
+<doc>Send a DELETE request on the session object found using the
+given `alias`</doc>
+<msg timestamp="20220927 05:11:08.117" level="INFO">DELETE Request : url=http://127.0.0.1:5000/finance/api/v1.0/payments/1 
+ path_url=/finance/api/v1.0/payments/1 
+ headers={'User-Agent': 'python-requests/2.22.0', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive', 'Content-Length': '0', 'Authorization': 'Basic am9objpqb2hu'} 
+ body=None 
+ </msg>
+<msg timestamp="20220927 05:11:08.118" level="INFO">DELETE Response : url=http://127.0.0.1:5000/finance/api/v1.0/payments/1 
+ status=200, reason=OK 
+ body={
+  "deleted": 1
+}
+ 
+ </msg>
+<msg timestamp="20220927 05:11:08.118" level="INFO">${response} = &lt;Response [200]&gt;</msg>
+<status status="PASS" starttime="20220927 05:11:07.885" endtime="20220927 05:11:08.118"/>
+</kw>
+<msg timestamp="20220927 05:11:08.118" level="INFO">${response} = &lt;Response [200]&gt;</msg>
+<status status="PASS" starttime="20220927 05:11:07.880" endtime="20220927 05:11:08.118"/>
+</kw>
+<kw name="Then Status Should Be" library="RequestsLibrary">
+<arg>403</arg>
+<arg>${response}</arg>
+<doc>Fails if response status code is different than the expected.</doc>
+<msg timestamp="20220927 05:11:08.119" level="FAIL">Url: http://127.0.0.1:5000/finance/api/v1.0/payments/1 Expected status: 200 != 403</msg>
+<status status="FAIL" starttime="20220927 05:11:08.118" endtime="20220927 05:11:08.119"/>
+</kw>
+<kw name="Web App test case teardown" library="CommonKeywords" type="TEARDOWN">
+<doc>Web App test case teardown</doc>
+<kw name="Reset" library="db_sqlite">
+<status status="PASS" starttime="20220927 05:11:08.120" endtime="20220927 05:11:08.644"/>
+</kw>
+<status status="PASS" starttime="20220927 05:11:08.120" endtime="20220927 05:11:08.645"/>
+</kw>
+<doc>Remove payment with admin user</doc>
+<tag>RemovePayment Post</tag>
+<status status="FAIL" starttime="20220927 05:11:07.602" endtime="20220927 05:11:08.645">Url: http://127.0.0.1:5000/finance/api/v1.0/payments/1 Expected status: 200 != 403</status>
+</test>
+<test id="s1-s4-t4" name="TestID_Remove_Payments_With_Non_Exsitent_PaymentID" line="39">
+<kw name="Create Dictionary" library="BuiltIn">
+<var>&amp;{body}</var>
+<arg>purchase=1001</arg>
+<arg>user=john</arg>
+<arg>amount=9000</arg>
+<arg>currency=GBP</arg>
+<arg>completed=2</arg>
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<msg timestamp="20220927 05:11:08.647" level="INFO">&amp;{body} = { purchase=1001 | user=john | amount=9000 | currency=GBP | completed=2 }</msg>
+<status status="PASS" starttime="20220927 05:11:08.647" endtime="20220927 05:11:08.647"/>
+</kw>
+<kw name="When I create payments with" library="CreatePaymentsKeywords">
+<arg>admin</arg>
+<arg>admin</arg>
+<arg>${body}</arg>
+<doc>Create payment with user credentials</doc>
+<kw name="Create List" library="BuiltIn">
+<var>${auth}</var>
+<arg>${user}</arg>
+<arg>${passwd}</arg>
+<doc>Returns a list containing given items.</doc>
+<msg timestamp="20220927 05:11:08.649" level="INFO">${auth} = ['admin', 'admin']</msg>
+<status status="PASS" starttime="20220927 05:11:08.648" endtime="20220927 05:11:08.649"/>
+</kw>
+<kw name="Create Session" library="RequestsLibrary">
+<arg>paymentsession</arg>
+<arg>${URL}</arg>
+<arg>verify=true</arg>
+<arg>auth=${auth}</arg>
+<doc>Create Session: create a HTTP session to a server</doc>
+<msg timestamp="20220927 05:11:08.649" level="INFO">Creating Session using : alias=paymentsession, url=http://127.0.0.1:5000, headers={},                     cookies={}, auth=&lt;requests.auth.HTTPBasicAuth object at 0x7fce96a10f10&gt;, timeout=None, proxies=None, verify=True,                     debug=0 </msg>
+<status status="PASS" starttime="20220927 05:11:08.649" endtime="20220927 05:11:08.650"/>
+</kw>
+<kw name="Put Request" library="RequestsLibrary">
+<var>${response}</var>
+<arg>paymentsession</arg>
+<arg>${route}</arg>
+<arg>json=${body}</arg>
+<doc>Send a PUT request on the session object found using the
+given `alias`</doc>
+<msg timestamp="20220927 05:11:08.886" level="INFO">PUT Request : url=http://127.0.0.1:5000/finance/api/v1.0/payments 
+ path_url=/finance/api/v1.0/payments 
+ headers={'User-Agent': 'python-requests/2.22.0', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive', 'Content-Length': '91', 'Content-Type': 'application/json', 'Authorization': 'Basic YWRtaW46YWRtaW4='} 
+ body=b'{"purchase": "1001", "user": "john", "amount": "9000", "currency": "GBP", "completed": "2"}' 
+ </msg>
+<msg timestamp="20220927 05:11:08.887" level="INFO">PUT Response : url=http://127.0.0.1:5000/finance/api/v1.0/payments 
+ status=200, reason=OK 
+ body={
+  "created": 1
+}
+ 
+ </msg>
+<msg timestamp="20220927 05:11:08.887" level="INFO">${response} = &lt;Response [200]&gt;</msg>
+<status status="PASS" starttime="20220927 05:11:08.650" endtime="20220927 05:11:08.887"/>
+</kw>
+<status status="PASS" starttime="20220927 05:11:08.648" endtime="20220927 05:11:08.887"/>
+</kw>
+<kw name="Then I remove payments with" library="RemovePaymentsKeywords">
+<var>${response}</var>
+<arg>admin</arg>
+<arg>admin</arg>
+<arg>99</arg>
+<doc>remove payment with user credentials</doc>
+<kw name="Create List" library="BuiltIn">
+<var>${auth}</var>
+<arg>${user}</arg>
+<arg>${passwd}</arg>
+<doc>Returns a list containing given items.</doc>
+<msg timestamp="20220927 05:11:08.890" level="INFO">${auth} = ['admin', 'admin']</msg>
+<status status="PASS" starttime="20220927 05:11:08.889" endtime="20220927 05:11:08.890"/>
+</kw>
+<kw name="Create Session" library="RequestsLibrary">
+<arg>paymentsession</arg>
+<arg>${URL}</arg>
+<arg>verify=true</arg>
+<arg>auth=${auth}</arg>
+<doc>Create Session: create a HTTP session to a server</doc>
+<msg timestamp="20220927 05:11:08.891" level="INFO">Creating Session using : alias=paymentsession, url=http://127.0.0.1:5000, headers={},                     cookies={}, auth=&lt;requests.auth.HTTPBasicAuth object at 0x7fce969a2790&gt;, timeout=None, proxies=None, verify=True,                     debug=0 </msg>
+<status status="PASS" starttime="20220927 05:11:08.890" endtime="20220927 05:11:08.891"/>
+</kw>
+<kw name="Delete Request" library="RequestsLibrary">
+<var>${response}</var>
+<arg>paymentsession</arg>
+<arg>${route}${id}</arg>
+<doc>Send a DELETE request on the session object found using the
+given `alias`</doc>
+<msg timestamp="20220927 05:11:09.054" level="INFO">DELETE Request : url=http://127.0.0.1:5000/finance/api/v1.0/payments/99 
+ path_url=/finance/api/v1.0/payments/99 
+ headers={'User-Agent': 'python-requests/2.22.0', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive', 'Content-Length': '0', 'Authorization': 'Basic YWRtaW46YWRtaW4='} 
+ body=None 
+ </msg>
+<msg timestamp="20220927 05:11:09.054" level="INFO">DELETE Response : url=http://127.0.0.1:5000/finance/api/v1.0/payments/99 
+ status=200, reason=OK 
+ body={
+  "deleted": 0
+}
+ 
+ </msg>
+<msg timestamp="20220927 05:11:09.054" level="INFO">${response} = &lt;Response [200]&gt;</msg>
+<status status="PASS" starttime="20220927 05:11:08.892" endtime="20220927 05:11:09.054"/>
+</kw>
+<msg timestamp="20220927 05:11:09.054" level="INFO">${response} = &lt;Response [200]&gt;</msg>
+<status status="PASS" starttime="20220927 05:11:08.888" endtime="20220927 05:11:09.054"/>
+</kw>
+<kw name="Then Status Should Be" library="RequestsLibrary">
+<arg>200</arg>
+<arg>${response}</arg>
+<doc>Fails if response status code is different than the expected.</doc>
+<status status="PASS" starttime="20220927 05:11:09.054" endtime="20220927 05:11:09.055"/>
+</kw>
+<kw name="And Should Be Equal As Integers" library="BuiltIn">
+<arg>${response.json()['deleted']}</arg>
+<arg>0</arg>
+<doc>Fails if objects are unequal after converting them to integers.</doc>
+<msg timestamp="20220927 05:11:09.055" level="INFO">Argument types are:
+&lt;class 'int'&gt;
+&lt;class 'str'&gt;</msg>
+<status status="PASS" starttime="20220927 05:11:09.055" endtime="20220927 05:11:09.055"/>
+</kw>
+<kw name="Web App test case teardown" library="CommonKeywords" type="TEARDOWN">
+<doc>Web App test case teardown</doc>
+<kw name="Reset" library="db_sqlite">
+<status status="PASS" starttime="20220927 05:11:09.056" endtime="20220927 05:11:09.681"/>
+</kw>
+<status status="PASS" starttime="20220927 05:11:09.056" endtime="20220927 05:11:09.681"/>
+</kw>
+<doc>Remove payment with admin user</doc>
+<tag>RemovePayment Post</tag>
+<status status="PASS" starttime="20220927 05:11:08.646" endtime="20220927 05:11:09.681"/>
+</test>
+<doc>Test suite to Romove payments</doc>
+<status status="FAIL" starttime="20220927 05:11:05.227" endtime="20220927 05:11:09.682"/>
+</suite>
+<status status="FAIL" starttime="20220927 05:10:47.137" endtime="20220927 05:11:09.683"/>
+</suite>
+<statistics>
+<total>
+<stat pass="21" fail="3" skip="0">All Tests</stat>
+</total>
+<tag>
+<stat pass="5" fail="1" skip="0">ConvertPayment Post</stat>
+<stat pass="8" fail="1" skip="0">CreatePayment PUT</stat>
+<stat pass="5" fail="0" skip="0">GetPayment Get</stat>
+<stat pass="3" fail="1" skip="0">RemovePayment Post</stat>
+</tag>
+<suite>
+<stat pass="21" fail="3" skip="0" id="s1" name="Tests">Tests</stat>
+<stat pass="5" fail="1" skip="0" id="s1-s1" name="ConvertPayments">Tests.ConvertPayments</stat>
+<stat pass="8" fail="1" skip="0" id="s1-s2" name="CreatePayments">Tests.CreatePayments</stat>
+<stat pass="5" fail="0" skip="0" id="s1-s3" name="GetPayments">Tests.GetPayments</stat>
+<stat pass="3" fail="1" skip="0" id="s1-s4" name="RemovePayments">Tests.RemovePayments</stat>
+</suite>
+</statistics>
+<errors>
+</errors>
+</robot>

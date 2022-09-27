@@ -104,6 +104,6 @@ Please check ./assignment.postman_collection.json file, this is an exploratory t
    6.3 In practical, it is better implement a class to handle different database libraries, and switch different libraries
    
 #### 7. What would you improve in your approach and code if you have more time?     
-   7.1 Implement Test Suite Setup to start flask app and Suite Teardown to stop flask app     
-   7.2 Create separated Dockerfile to deploy the flask app and test
+   7.1 Implement Test Suite Setup to start flask app and Suite Teardown to stop flask app          
+   7.2 Create separated Dockerfile to deploy the flask app and test   
    7.3 Install python package with specific dependencies to avoid compatible issue and maintaining docker file

@@ -1,15 +1,17 @@
 *** Settings ***
-Documentation     Test suite to create payments
+Documentation     get payment keywords
 Resource          ../Keywords/CommonKeywords.robot
-# Suite Setup             Web App Test Suite Setup
-# Suite Teardown          Web App Test Suite Teardown
 
-*** Test Cases ***
-TestID_Create_Payments_Single_With_Admin
-    [Documentation]    Create payment with admin user
-    [Tags]    CreatePayment Get
-#    [Setup]    Web App test case setup
-    [Teardown]    Web App test case teardown
-    ${response}    When I create payments with    admin    admin
-    Then Status Should Be    200    ${response}
-    And Payment should contain purchase    ${response}    12345
+*** Variables ***
+
+
+*** Keywords ***
+I create payments with
+    [Arguments]    ${user}  ${passwd}    ${body}    ${route}=finance/api/v1.0/payments
+    [Documentation]    Create payment with user credentials
+    ${auth}=  Create List  ${user}  ${passwd}
+    Create Session  paymentsession  ${URL}  verify=true   auth=${auth}
+    ${response}=  Put Request  paymentsession    ${route}    json=${body}
+    [Return]    ${response}
+
+

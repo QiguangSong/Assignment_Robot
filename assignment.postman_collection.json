@@ -1,0 +1,223 @@
+{
+	"info": {
+		"_postman_id": "847033a4-b75f-44a8-a95f-8cd7acf6d10c",
+		"name": "assignment",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "103401"
+	},
+	"item": [
+		{
+			"name": "list_payments",
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "admin",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "admin",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://127.0.0.1:5000/finance/api/v1.0/payments",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "5000",
+					"path": [
+						"finance",
+						"api",
+						"v1.0",
+						"payments"
+					]
+				},
+				"description": "enrolments\nRequest Headers: [\"X-Device-ID\": \"5c7a4f24-3d83-4195-8438-2fadc7fb4d1b\", \"Content-Type\": \"application/json\"]\nRequest Body: {\"phoneNumber\":\"+31600000006\",\"language\":\"en\"}"
+			},
+			"response": []
+		},
+		{
+			"name": "create_payment",
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "admin",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "admin",
+							"type": "string"
+						}
+					]
+				},
+				"method": "PUT",
+				"header": [
+					{
+						"key": "X-Device-ID",
+						"type": "text",
+						"value": "5c7a4f24-3d83-4195-8438-2fadc7fb4d1b"
+					},
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"purchase\":4,\"user\":\"jhon\", \"amount\": 2000, \"currency\": \"USD\", \"completed\": 1}"
+				},
+				"url": {
+					"raw": "http://127.0.0.1:5000/finance/api/v1.0/payments",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "5000",
+					"path": [
+						"finance",
+						"api",
+						"v1.0",
+						"payments"
+					]
+				},
+				"description": "enrolments\nRequest Headers: [\"X-Device-ID\": \"5c7a4f24-3d83-4195-8438-2fadc7fb4d1b\", \"Content-Type\": \"application/json\"]\nRequest Body: {\"phoneNumber\":\"+31600000006\",\"language\":\"en\"}"
+			},
+			"response": []
+		},
+		{
+			"name": "process_payment_currency_convert",
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "admin",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "admin",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "X-Device-ID",
+						"type": "text",
+						"value": "5c7a4f24-3d83-4195-8438-2fadc7fb4d1b"
+					},
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "http://127.0.0.1:5000/finance/api/v1.0/payments",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "5000",
+					"path": [
+						"finance",
+						"api",
+						"v1.0",
+						"payments"
+					]
+				},
+				"description": "enrolments\nRequest Headers: [\"X-Device-ID\": \"5c7a4f24-3d83-4195-8438-2fadc7fb4d1b\", \"Content-Type\": \"application/json\"]\nRequest Body: {\"phoneNumber\":\"+31600000006\",\"language\":\"en\"}"
+			},
+			"response": []
+		},
+		{
+			"name": "remove_payment",
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "admin",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "admin",
+							"type": "string"
+						}
+					]
+				},
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "X-Device-ID",
+						"type": "text",
+						"value": "5c7a4f24-3d83-4195-8438-2fadc7fb4d1b"
+					},
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "http://127.0.0.1:5000/finance/api/v1.0/payments/5",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "5000",
+					"path": [
+						"finance",
+						"api",
+						"v1.0",
+						"payments",
+						"5"
+					]
+				},
+				"description": "enrolments\nRequest Headers: [\"X-Device-ID\": \"5c7a4f24-3d83-4195-8438-2fadc7fb4d1b\", \"Content-Type\": \"application/json\"]\nRequest Body: {\"phoneNumber\":\"+31600000006\",\"language\":\"en\"}"
+			},
+			"response": []
+		}
+	]
+}

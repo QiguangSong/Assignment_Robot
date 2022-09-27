@@ -79,7 +79,8 @@ Please check ./assignment.postman_collection.json file, this is an exploratory t
 #### 3. Automate test cases a)in Python: create test libraries,b)in Robot Framework: import these libraries and create test suites and test cases.
 
    _Note_: after each test consider to return the test target (app, data) into the same state.
-   Please check Test cases under ./Tests
+   * Please check Test cases under ./Tests
+   * The keyword Web App test case teardown call the function reset to drop tables and create new ones with data.
    
 #### 4. Execute test cases locally using robot framework and from a docker container.      
    Please check the docker file ./Dockerfile.test

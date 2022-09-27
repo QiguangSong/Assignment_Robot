@@ -7,11 +7,11 @@ Resource          ../Keywords/CommonKeywords.robot
 
 *** Keywords ***
 I get payments with
-    [Arguments]    ${user}  ${passwd}
+    [Arguments]    ${user}  ${passwd}    ${route}=finance/api/v1.0/payments
     [Documentation]    Get payment with user credentials
     ${auth}=  Create List  ${user}  ${passwd}
     Create Session  paymentsession  ${URL}  verify=true   auth=${auth}
-    ${response}=  Get Request  paymentsession  finance/api/v1.0/payments
+    ${response}=  Get Request  paymentsession    ${route}
     [Return]    ${response}
 
 

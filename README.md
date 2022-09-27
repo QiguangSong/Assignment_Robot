@@ -89,9 +89,13 @@ Please check ./assignment.postman_collection.json file, this is an exploratory t
 
 #### 6. The application uses SQLite database, but what will change in your code if it gets replaced with MySQL or MS SQL or Oracle?    
    6.1 Query should be updated because different databases have different syntax or datatype:   
-   6.1.1 update with mssql query: please check ./Utils/Database/db_mssql.py
-   6.1.2 update with mysql query: please check ./Utils/Database/db_mysql.py
+   6.1.1 update with mssql query: please check ./Libraries/Database/db_mssql.py
+   6.1.2 update with mysql query: please check ./Libraries/Database/db_mysql.py
    6.1.3 update with oracle query: as far as I remember oracle doesn't support 
    ```DROP TABLE IF EXISTS``` and oracle has very strict data type and expected values
+   6.2 Python package per Database are different, and the way to interact with queries are a bit different
+   6.3 In practical, Python 
    
-#### 7. What would you improve in your approach and code if you have more time?   
+#### 7. What would you improve in your approach and code if you have more time?     
+   7.1 Implement Test Suite Setup to start flask app and Suite Teardown to stop flask app
+

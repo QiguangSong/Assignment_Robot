@@ -1,23 +1,15 @@
 *** Settings ***
-Documentation     A test suite with a single test for valid login.
-...
-...               NN Test Cases.
-Resource          ../keywords/keywords.robot
-
-Test Teardown       Restore Database
+Documentation     Test suite to get payments
+Resource          ../Keywords/GetPaymentsKeywords.robot
+# Suite Setup             Web App Test Suite Setup
+# Suite Teardown          Web App Test Suite Teardown
 
 *** Test Cases ***
-Scenario: Retrive all payments
-    [Template]  Retrive all payments
-    # username        # password
-    admin             admin
-    john              john
-    unknown           unknown
-
-
-*** Keywords ***
-Retrive all payments
-    [Arguments]     ${user}    ${passwd}
-    When i request to retrive the payments as    ${user}  ${passwd}
-    Then the payments should be retrived
-
+TestID_Get_Payments_Single_Defalt
+    [Documentation]    Get Predifined Payment
+    [Tags]    GetPayment Get
+#    [Setup]    Web App test case setup
+    [Teardown]    Web App test case teardown
+    ${response}    When I get payments with    admin    admin
+    Then Status Should Be    200    ${response}
+    And Payment should contain purchase    ${response}    12345

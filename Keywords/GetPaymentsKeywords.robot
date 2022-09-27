@@ -14,7 +14,6 @@ I get payments with
     ${response}=  Get Request  paymentsession    ${route}
     [Return]    ${response}
 
-
 Payment should contain purchase
     [Arguments]    ${payment}    ${purchase}
     [Documentation]    Payment should contain specific purchase ID
@@ -22,3 +21,19 @@ Payment should contain purchase
     Should Be Equal As Integers  ${PaymentLength}  6
     ${titleFromList}=  Get From List   ${payment.json()['payments'][-1]}   1
     Should Be Equal As Integers  ${titleFromList}  ${purchase}
+
+Payment should contain currency
+    [Arguments]    ${payment}    ${currency}
+    [Documentation]    Payment should contain specific purchase ID
+    ${PaymentLength}=   Get Length	    ${payment.json()['payments'][-1]}
+    Should Be Equal As Integers  ${PaymentLength}  6
+    ${titleFromList}=  Get From List   ${payment.json()['payments'][-1]}   4
+    Should Be Equal  ${titleFromList}  ${currency}
+
+Payment should not contain currency
+    [Arguments]    ${payment}    ${currency}
+    [Documentation]    Payment should contain specific purchase ID
+    ${PaymentLength}=   Get Length	    ${payment.json()['payments'][-1]}
+    Should Be Equal As Integers  ${PaymentLength}  6
+    ${titleFromList}=  Get From List   ${payment.json()['payments'][-1]}   4
+    Should Not Be Equal  ${titleFromList}  ${currency}

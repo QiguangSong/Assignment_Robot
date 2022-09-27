@@ -1,5 +1,5 @@
 *** Settings ***
-Documentation     get payment keywords
+Documentation     create payment keywords
 Resource          ../Keywords/CommonKeywords.robot
 
 *** Variables ***
